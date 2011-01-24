@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin-config>
+	<libraries library-dir="lib"/>
+	<resourceBundle name="text"/>
+	<extensions>
+		<extension class-name="es.udc.cartolab.gvsig.eieltable.EIELTableExtension" description="form" active="true">
+			<menu text="EIEL/Tabla/Carreteras"
+				action-command="Carreteras"
+				position="0903"/>
+			<menu text="EIEL/Tabla/Calles"
+				action-command="Calles"
+				position="0904"/>
+			<menu text="EIEL/Tabla/Municipio Datos Generales"
+				action-command="Municipio Datos Generales"
+				position="0906"/>
+			<menu text="EIEL/Tabla/Municipio Abastecimiento"
+				action-command="Municipio Abastecimiento"
+				position="0907"/>
+			<menu text="EIEL/Tabla/Municipio Saneamiento"
+				action-command="Municipio Saneamiento"
+				position="0908"/>
+			<menu text="EIEL/Tabla/Municipio Recogida Residuos"
+				action-command="Municipio Recogida Residuos"
+				position="0909"/>
+			<menu text="EIEL/Tabla/Municipio Alumbrado"
+				action-command="Municipio Alumbrado"
+				position="0910"/>
+			<menu text="EIEL/Tabla/Otros servicios municipales"
+				action-command="Otros_Servicios_Municipales_alfanumericos"
+				position="0911"/>
+			<menu text="EIEL/Tabla/Planeamiento Urbanístico"
+				action-command="Plan_Urbanistico_alfanumericos"
+				position="0912"/>
+			<menu text="EIEL/Tabla/Núcleo Datos Generales"
+				action-command="Nucleo encuestado 1"
+				position="0913"/>
+			<menu text="EIEL/Tabla/Núcleo Abastecimiento"
+				action-command="Nucleo encuestado 2"
+				position="0914"/>
+			<menu text="EIEL/Tabla/Núcleo Abastecimiento 2"
+				action-command="Nucleo encuestado 3"
+				position="0915"/>
+			<menu text="EIEL/Tabla/Núcleo Abastecimiento Autónomo"
+				action-command="Nucleo encuestado 4"
+				position="0916"/>
+			<menu text="EIEL/Tabla/Núcleo Saneamiento y depuración"
+				action-command="Nucleo encuestado 5"
+				position="0917"/>
+			<menu text="EIEL/Tabla/Núcleo Recogida de basura"
+				action-command="Nucleo encuestado 6"
+				position="0918"/>
+			<menu text="EIEL/Tabla/Núcleo Otros datos"
+				action-command="Nucleo encuestado 7"
+				position="0919"/>
+			<menu text="EIEL/Tabla/Núcleos Abandonados"
+				action-command="Núcleos abandonados"
+				position="0920"/>
+			<menu text="EIEL/Tabla/Núcleo Saneamiento Autónomo"
+				action-command="Saneamiento_Autonomo_alfanumericos"
+				position="0921"/>
+			<menu text="EIEL/Tabla/Alumbrado"
+				action-command="Alumbrado"
+				position="0922"/>
+			<menu text="EIEL/Tabla/Captaciones"
+				action-command="Captaciones de agua"
+				position="0923"/>
+			<menu text="EIEL/Tabla/Depósitos"
+				action-command="Depositos_alfanumericos"
+				position="0924"/>
+			<menu text="EIEL/Tabla/Depuradoras"
+				action-command="Depuradoras_alfanumericos"
+				position="0925"/>
+			<menu text="EIEL/Tabla/Entidades"
+				action-command="Entidad singular"
+				position="0926" />
+			<menu text="EIEL/Tabla/Colector"
+				action-command="Colector_alfanumericos"
+				position="0927" />
+			<menu text="EIEL/Tabla/Conducción"
+				action-command="Conduccion_alfanumericos"
+				position="0928" />
+			<menu text="EIEL/Tabla/Emisarios"
+				action-command="Emisarios"
+				position="0929" />
+			<menu text="EIEL/Tabla/Emisarios encuestados"
+				action-command="Emisarios_encuestados"
+				position="0930" />
+			<menu text="EIEL/Tabla/Vertederos"
+				action-command="Vertederos_alfanumericos"
+				position="0931" />
+			<menu text="EIEL/Tabla/Potabilizadoras"
+				action-command="Potabilizadoras_alfanumerico"
+				position="0932" />
+
+		</extension>
+
+	</extensions>
+</plugin-config>
