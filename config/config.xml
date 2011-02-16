@@ -11,7 +11,7 @@
 	<libraries library-dir="lib"/>
 	<resourceBundle name="text"/>
 	<extensions>
-		<extension class-name="es.udc.cartolab.gvsig.eielforms.FormExtension" description="Formulario" active="true">
+		<extension class-name="es.udc.cartolab.gvsig.eieltable.TableExtension" description="Formulario" active="true">
 			<menu text="EIEL/Formularios/Formulario de la capa"
 				action-command="form"
 				icon="eielform"
@@ -21,19 +21,19 @@
 					action-command="form" position="1510"/>
 			</tool-bar>
 		</extension>
-		<extension class-name="es.udc.cartolab.gvsig.eielforms.ThrowFormExtension" description="throw_form" active="true">
+		<extension class-name="es.udc.cartolab.gvsig.eieltable.ThrowTableExtension" description="throw_form" active="true">
 			<tool-bar name="NavTable">
 				<action-tool icon="throw-form" tooltip="activar_formularios"
 					action-command="throw_form" position="1511" name="throw-form"/>
 			</tool-bar>
 		</extension>
-		<extension class-name="es.udc.cartolab.gvsig.eielforms.FormPointExtension" description="throw_form" active="true">
+		<extension class-name="es.udc.cartolab.gvsig.eieltable.TablePointExtension" description="throw_form" active="true">
 			<tool-bar name="NavTable">
 				<action-tool icon="view-query-information" tooltip="Consulta EIEL"
 					action-command="info_form" position="1512" name="info_form"/>
 			</tool-bar>
 		</extension>
-		<extension class-name="es.udc.cartolab.gvsig.eielforms.AlphanumericFormExtension" description="form" active="true">
+		<extension class-name="es.udc.cartolab.gvsig.eieltable.AlphanumericTableExtension" description="form" active="true">
 			<menu text="EIEL/Formularios/Carreteras"
 				action-command="Carreteras"
 				position="0903"/>
