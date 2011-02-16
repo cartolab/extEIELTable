@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain name="tipo_tramo">
+  <UserDomain>
+    <DataBase>fpuga_Prueba</DataBase>
+    <Table>tipo_tramo</Table>
+  </UserDomain>
+</domain>

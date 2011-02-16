@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain name="tipos_mata">
+  <UserDomain>
+    <DataBase>fpuga_Prueba</DataBase>
+    <Table>tipos_mata</Table>
+  </UserDomain>
+</domain>

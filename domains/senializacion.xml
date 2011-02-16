@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain name="senializacion">
+  <UserDomain>
+    <DataBase>fpuga_Prueba</DataBase>
+    <Table>senializacion</Table>
+  </UserDomain>
+</domain>

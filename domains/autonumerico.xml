@@ -1,0 +1,6 @@
+<?xml version="1.0"?>  
+<domain name="Autonumerico">
+        <BasicDomain>
+                <BasicType>numerico</BasicType>
+        </BasicDomain>
+</domain>

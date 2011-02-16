@@ -1,0 +1,10 @@
+<domain name="varchar_4">
+<BasicDomain><BasicType>string</BasicType>
+<Restrictions><Restriction>
+<Name>LongitudCampoIgual_4</Name>
+<RestrictionSubclass>LongitudCampoIgual</RestrictionSubclass>
+<Value>4</Value>
+</Restriction>
+</Restrictions>
+</BasicDomain>
+</domain>

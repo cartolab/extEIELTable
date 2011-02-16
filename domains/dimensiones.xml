@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain name="dimensiones (Fase 4)">
+  <UserDomain>
+    <DataBase>fpuga_Prueba</DataBase>
+    <Table>dimensiones</Table>
+  </UserDomain>
+</domain>

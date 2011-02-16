@@ -1,0 +1,10 @@
+<domain name="numerico[x,1]">
+<BasicDomain><BasicType>string</BasicType>
+<Restrictions><Restriction>
+<Name>1</Name>
+<RestrictionSubclass>LongitudDecimales</RestrictionSubclass>
+<Value>1</Value>
+</Restriction>
+</Restrictions>
+</BasicDomain>
+</domain>

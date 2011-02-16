@@ -1,13 +1,13 @@
-<project name="extEIELTable" default="generate-without-source" basedir=".">
+<project name="extEIELForms" default="generate-without-source" basedir=".">
     <description>
-    	EIEL Table
+    	EIEL forms - test
     </description>
   <!-- set global properties for this build -->
   <property name="src" location="src"/>
   <property name="build" location="bin"/>
   <property name="dist"  location="dist"/>
   <property name="mainplugin" value="com.iver.cit.gvsig"/>
-  <property name="plugin" value="es.udc.cartolab.gvsig.eieltable"/>
+  <property name="plugin" value="es.udc.cartolab.gvsig.eielforms"/>
   <property name="andami" location="../_fwAndami" />
 	<property name="extensionsDir" location="../_fwAndami/gvSIG/extensiones"/>
 	<property name="lib-dir" location="${extensionsDir}/${mainplugin}/lib"/>
@@ -47,15 +47,15 @@
     	<fileset dir="config" includes="text*.properties"/>
     </copy>
   	
-  	<!-- <mkdir dir="${dist}/forms"/>
+  	<mkdir dir="${dist}/forms"/>
   	<copy todir="${dist}/forms">
       	<fileset dir="forms"/> 
-    </copy> 
+    </copy>
   	
   	<mkdir dir="${dist}/domains"/>
   	<copy todir="${dist}/domains">
       	<fileset dir="domains"/> 
-    </copy> -->
+    </copy>
   	
   	<move todir="${extensionsDir}/${plugin}/">
     	<fileset dir="${dist}" includes="**/**"/>
@@ -80,7 +80,7 @@
 			<fileset dir="config" includes="text*.properties"/>
 		</copy>
 		
-	  	<!-- <mkdir dir="${dist}/forms"/>
+	  	<mkdir dir="${dist}/forms"/>
 	  	<copy todir="${dist}/forms">
 	      	<fileset dir="forms"/> 
 	    </copy>		
@@ -88,7 +88,7 @@
 		<mkdir dir="${dist}/domains"/>
 		<copy todir="${dist}/domains">
 		   	<fileset dir="domains"/> 
-		</copy> -->
+		</copy>
 	</target>
 
 	<target name="move-to-andami">
