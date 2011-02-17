@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2010. Cartolab (Universidade da Coruña)
+ *
+ * This file is part of extEIELTable
+ *
+ * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
+ * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
+ *
+ * extEIELForms is free software: you can redistribute it and/or modify it under the terms
+ * of the GNU General Public License as published by the Free Software Foundation, either
+ * version 3 of the License, or any later version.
+ *
+ * extEIELForms is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with extEIELForms.
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package es.udc.cartolab.gvsig.eieltable;
 import java.util.ArrayList;
 
@@ -6,7 +26,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import es.udc.cartolab.gvsig.eieltable.domain.generator.DomainGenerator2;
+import es.udc.cartolab.gvsig.eieltable.domain.generator.DomainGeneratorCustom;
 import es.udc.cartolab.gvsig.eieltable.group.ComplexGroup;
 import es.udc.cartolab.gvsig.eieltable.group.Group;
 import es.udc.cartolab.gvsig.eieltable.group.SimpleGroup;
@@ -84,7 +104,7 @@ public abstract class Parser {
 				} else if ((auxN.getNodeName().equals("Label")) && (auxN.hasChildNodes())) {
 					field.setLabel(((Node) auxN.getChildNodes().item(0)).getNodeValue());
 				} else if ((auxN.getNodeName().equals("Domain")) && (auxN.hasChildNodes())) {
-					field.setDomain(DomainGenerator2.getDomain(((Node) auxN.getChildNodes().item(0)).getNodeValue()));
+					field.setDomain(DomainGeneratorCustom.getDomain(((Node) auxN.getChildNodes().item(0)).getNodeValue()));
 				} else if ((auxN.getNodeName().equals("DefaultValue")) && (auxN.hasChildNodes())) {
 					if ((((Node) auxN.getChildNodes().item(0)).getNodeName().equals("ConstantValue")) && (((Node) auxN.getChildNodes().item(0)).hasChildNodes())) {
 						field.setDefaultValue(((Node) ((Node) auxN.getChildNodes().item(0)).getChildNodes().item(0)).getNodeValue());

@@ -20,57 +20,60 @@
 
 package es.udc.cartolab.gvsig.eieltable.domain.generator;
 
+import java.util.HashMap;
+
 import es.udc.cartolab.gvsig.eieltable.structure.domain.Domain;
 
+
 /**
- * Domain Retrieval Exception.
+ * Domain Cache.
  * 
- * Exception thrown when we have any problem
- * while retrieving or parsing a domain.
+ * Class used as a cache for previously retrieved domains.
  * 
  * @see Domain
- * @see DomainReader2
  */
-public class DomainException2 extends Exception {
+public class DomainCacheCustom
+{
 
 	/**
-	 * Domain Retrieval Exception Generic Exception Based Constructor.
-	 * 
-	 * Constructor which accepts a generic Exception
-	 * for creating a Domain Exception based on it.
-	 * 
-	 * @param e the exception we want to create the DomainException based on.
-	 * 
-	 * @returns A new DomainException.
-	 * 
-	 * @see Exception
+	 * HashMap used for storing the cache.
 	 */
-	public DomainException2(Exception e) {
-		super(e);
+	private HashMap cache;
+
+	/**
+	 * Domain Cache Constructor.
+	 * 
+	 * This is the public constructor for Domain Cache, which takes no arguments.
+	 * 
+	 * @return A new  DomainCache.
+	 */
+	public DomainCacheCustom()
+	{
+		this.cache = new HashMap();
 	}
 
 	/**
-	 * Domain Retrieval Exception Constructor.
+	 * Cache domain adder.
 	 * 
-	 * Constructor for creating a default Domain Exception.
+	 * This function adds a domain to the cache with the given name.
 	 * 
-	 * @returns A new DomainException.
+	 * @param name the name we want to register the domain with.
+	 * @param domain the domain we want to register.
 	 */
-	public DomainException2() {
-		super();
+	public void addDomain(String name, Domain domain) {
+		this.cache.put(name, domain);
 	}
 
 	/**
-	 * Domain Retrieval Exception Constructor.
+	 * Cache domain retriever.
 	 * 
-	 * Constructor which accepts an error message for
-	 * creating a Domain Exception with it.
+	 * This function retrieves a domain from the cache with the given name.
 	 * 
-	 * @param msg error message we want the Domain Exception to contain.
+	 * @param name the name of the Domain we want to retrieve.
 	 * 
-	 * @returns A new DomainException.
+	 * @return The Domain for the given name.
 	 */
-	public DomainException2(String msg) {
-		super(msg);
+	public Domain getDomain(String name) {
+		return ((Domain)this.cache.get(name));
 	}
 }

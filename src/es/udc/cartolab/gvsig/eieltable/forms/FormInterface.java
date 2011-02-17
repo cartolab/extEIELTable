@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -406,8 +406,8 @@ public class FormInterface extends JPanel
 				if (this.nucleosRelation!=null) {
 					this.nucleosRelationPanel.add(pollButton);
 				} else {
-				panel.add(pollButton, this.gridbagconst);
-				updateLayout();
+					panel.add(pollButton, this.gridbagconst);
+					updateLayout();
 				}
 				pollButton.addActionListener(new ActionListener() {
 

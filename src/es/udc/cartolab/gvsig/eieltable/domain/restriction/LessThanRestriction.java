@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -22,32 +22,35 @@ package es.udc.cartolab.gvsig.eieltable.domain.restriction;
 
 public class LessThanRestriction extends NumericFieldRestriction
 {
-  private Float myValue;
+	private Float myValue;
 
-  public LessThanRestriction(String name, Float value)
-  {
-    super(name);
-    this.myValue = value;
-  }
+	public LessThanRestriction(String name, Float value)
+	{
+		super(name);
+		this.myValue = value;
+	}
 
-  public boolean validate(String value) {
-    boolean valido = true;
-    try
-    {
-      Float valorAux = new Float(value);
-      if (valorAux.compareTo(this.myValue) > 0)
-        valido = true;
-      else
-        valido = false;
-    }
-    catch (NumberFormatException e)
-    {
-      valido = false;
-    }
-    return valido;
-  }
+	@Override
+	public boolean validate(String value) {
+		boolean valido = true;
+		try
+		{
+			Float valorAux = new Float(value);
+			if (valorAux.compareTo(this.myValue) > 0) {
+				valido = true;
+			} else {
+				valido = false;
+			}
+		}
+		catch (NumberFormatException e)
+		{
+			valido = false;
+		}
+		return valido;
+	}
 
-  public String toString() {
-    return new String("El valor del campo debe de ser menor que " + this.myValue.toString());
-  }
+	@Override
+	public String toString() {
+		return new String("El valor del campo debe de ser menor que " + this.myValue.toString());
+	}
 }

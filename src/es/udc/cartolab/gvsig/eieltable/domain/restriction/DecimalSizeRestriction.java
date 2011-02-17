@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -22,65 +22,68 @@ package es.udc.cartolab.gvsig.eieltable.domain.restriction;
 
 public class DecimalSizeRestriction extends NumericFieldRestriction
 {
-  private Integer decimalSize;
+	private Integer decimalSize;
 
-  public DecimalSizeRestriction(String name, Integer decimalSize)
-  {
-    super(name);
-    this.decimalSize = decimalSize;
-  }
+	public DecimalSizeRestriction(String name, Integer decimalSize)
+	{
+		super(name);
+		this.decimalSize = decimalSize;
+	}
 
-  public boolean validate(String value)
-  {
-    boolean valido = true;
+	@Override
+	public boolean validate(String value)
+	{
+		boolean valido = true;
 
-    if (this.decimalSize.compareTo(new Integer(0)) == 0)
-      valido = integerValidation(value);
-    else {
-      valido = decimalValidation(value);
-    }
-    return valido;
-  }
+		if (this.decimalSize.compareTo(new Integer(0)) == 0) {
+			valido = integerValidation(value);
+		} else {
+			valido = decimalValidation(value);
+		}
+		return valido;
+	}
 
-  private boolean decimalValidation(String value)
-  {
-    boolean valido = true;
-    try
-    {
-      Float valorAux = new Float(value);
-      int posicionComa = value.indexOf(".");
-      Integer totalDecimales = new Integer(value.length() - posicionComa - 1);
+	private boolean decimalValidation(String value)
+	{
+		boolean valido = true;
+		try
+		{
+			Float valorAux = new Float(value);
+			int posicionComa = value.indexOf(".");
+			Integer totalDecimales = new Integer(value.length() - posicionComa - 1);
 
-      if (totalDecimales.compareTo(this.decimalSize) > 0)
-        valido = false;
-      else
-        valido = true;
-    }
-    catch (NumberFormatException e)
-    {
-      valido = false;
-    }
-    return valido;
-  }
+			if (totalDecimales.compareTo(this.decimalSize) > 0) {
+				valido = false;
+			} else {
+				valido = true;
+			}
+		}
+		catch (NumberFormatException e)
+		{
+			valido = false;
+		}
+		return valido;
+	}
 
-  private boolean integerValidation(String value) {
-    boolean valido = true;
-    try
-    {
-      Integer valorAux = new Integer(value);
-      valido = true;
-    }
-    catch (NumberFormatException e) {
-      valido = false;
-    }
-    return valido;
-  }
+	private boolean integerValidation(String value) {
+		boolean valido = true;
+		try
+		{
+			Integer valorAux = new Integer(value);
+			valido = true;
+		}
+		catch (NumberFormatException e) {
+			valido = false;
+		}
+		return valido;
+	}
 
-  public String toString() {
-    return new String("Numero maximo de decimalSize: " + this.decimalSize.toString());
-  }
+	@Override
+	public String toString() {
+		return new String("Numero maximo de decimalSize: " + this.decimalSize.toString());
+	}
 
-  public int getDecimalRestriction() {
-	  return this.decimalSize;
-  }
+	public int getDecimalRestriction() {
+		return this.decimalSize;
+	}
 }

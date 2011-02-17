@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -30,12 +30,12 @@ import es.udc.cartolab.gvsig.users.utils.DBSession;
 
 public class TablePointExtension extends Extension {
 
-	
+
 	public void initialize() {
 
 	}
 
-	
+
 	public void execute(String actionCommand) {
 		View view = (View) PluginServices.getMDIManager().getActiveWindow();
 		MapControl mc = view.getMapControl();
@@ -47,7 +47,7 @@ public class TablePointExtension extends Extension {
 		mc.setTool("formPoint");
 	}
 
-	
+
 	public boolean isEnabled() {
 
 		View view = (View) PluginServices.getMDIManager().getActiveWindow();
@@ -56,7 +56,7 @@ public class TablePointExtension extends Extension {
 
 	}
 
-	
+
 	public boolean isVisible() {
 
 		return PluginServices.getMDIManager().getActiveWindow() instanceof View && DBSession.getCurrentSession()!=null;

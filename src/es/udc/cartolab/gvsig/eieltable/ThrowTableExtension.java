@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU General Public License along with extEIELForms.
  * If not, see <http://www.gnu.org/licenses/>.
  */
+
 package es.udc.cartolab.gvsig.eieltable;
 
 import java.net.URL;
@@ -48,7 +49,7 @@ public class ThrowTableExtension extends Extension implements EndGeometryListene
 	private final URL onIcon = this.getClass().getClassLoader().getResource("images/forms-active.png");
 	private final String navTablePlugin = AutoNavTableExtension.KEY_NAME;
 
-	
+
 	public void initialize() {
 
 		formsEnabled = AutoNavTableExtension.getPreferences();
@@ -66,7 +67,7 @@ public class ThrowTableExtension extends Extension implements EndGeometryListene
 
 	}
 
-	
+
 	public void execute(String actionCommand) {
 
 		if (!formsEnabled) {
@@ -94,17 +95,17 @@ public class ThrowTableExtension extends Extension implements EndGeometryListene
 		}
 	}
 
-	
+
 	public boolean isEnabled() {
 		return true;
 	}
 
-	
+
 	public boolean isVisible() {
 		return true;
 	}
 
-	
+
 	public void endGeometry(FLayer layer) {
 
 		if (layer.isEditing()) {
@@ -127,6 +128,7 @@ public class ThrowTableExtension extends Extension implements EndGeometryListene
 		}
 	}
 
+	@Override
 	public void postInitialize() {
 		//desactiva el plugin de opencadtools de navtable y quita el listener
 		CADListenerManager.removeEndGeometryListener(navTablePlugin);

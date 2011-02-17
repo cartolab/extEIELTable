@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -71,6 +71,7 @@ public class NucleosRelationWindow extends AlphanumericForm {
 
 	}
 
+	@Override
 	public WindowInfo getWindowInfo() {
 		if (windowInfo == null) {
 			windowInfo = super.getWindowInfo();
@@ -81,6 +82,7 @@ public class NucleosRelationWindow extends AlphanumericForm {
 		return windowInfo;
 	}
 
+	@Override
 	public void open() {
 		super.open();
 
@@ -148,6 +150,7 @@ public class NucleosRelationWindow extends AlphanumericForm {
 
 	}
 
+	@Override
 	protected JPanel getButtonsPanel() {
 
 		JPanel panel = new JPanel();
@@ -403,6 +406,7 @@ public class NucleosRelationWindow extends AlphanumericForm {
 			return denominaci;
 		}
 
+		@Override
 		public boolean equals(Object obj) {
 			if (obj instanceof TableElement) {
 				TableElement te = (TableElement) obj;
@@ -421,6 +425,7 @@ public class NucleosRelationWindow extends AlphanumericForm {
 			return false;
 		}
 
+		@Override
 		public String toString() {
 			return "<Element " + fase + "|" + provincia + "|" + municipio + "|" + entidad + "|" + nucleo + ">";
 		}

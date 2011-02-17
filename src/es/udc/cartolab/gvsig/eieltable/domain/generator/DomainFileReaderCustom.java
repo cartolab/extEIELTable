@@ -1,19 +1,19 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
- * 
- * This file is part of extEIELForms
- * 
+ *
+ * This file is part of extEIELTable
+ *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
- * 
+ *
  * extEIELForms is free software: you can redistribute it and/or modify it under the terms
  * of the GNU General Public License as published by the Free Software Foundation, either
  * version 3 of the License, or any later version.
- * 
+ *
  * extEIELForms is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with extEIELForms.
  * If not, see <http://www.gnu.org/licenses/>.
  */
@@ -35,9 +35,9 @@ import es.udc.cartolab.gvsig.eieltable.structure.domain.Domain;
  * Class used for retrieving domain definitions from files.
  * 
  * @see Domain
- * @see DomainReader2
+ * @see DomainReaderCustom
  */
-public class DomainFileReader2 extends DomainReader2
+public class DomainFileReaderCustom extends DomainReaderCustom
 {
 
 	/**
@@ -57,7 +57,7 @@ public class DomainFileReader2 extends DomainReader2
 	 * 
 	 * @returns A new DomainDBReader.
 	 */
-	public DomainFileReader2() {
+	public DomainFileReaderCustom() {
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class DomainFileReader2 extends DomainReader2
 	 * 
 	 * @returns A new DomainDBReader.
 	 */
-	public DomainFileReader2(String pathToDomains) {
+	public DomainFileReaderCustom(String pathToDomains) {
 		this.pathToDomains = pathToDomains;
 	}
 
@@ -86,7 +86,7 @@ public class DomainFileReader2 extends DomainReader2
 	 * @throws FormException
 	 * @returns The definition as a String with its xml.
 	 */
-	public String getDomainDefinition(String domainName) throws DomainException2
+	public String getDomainDefinition(String domainName) throws DomainException
 	{
 		File file = new File(pathToDomains  + domainName.toLowerCase() + ".xml");
 		StringBuffer sb = new StringBuffer();
@@ -98,9 +98,9 @@ public class DomainFileReader2 extends DomainReader2
 				sb.append("\n");
 			}
 		} catch (FileNotFoundException e) {
-			throw new DomainException2(e);
+			throw new DomainException(e);
 		} catch (IOException e) {
-			throw new DomainException2(e);
+			throw new DomainException(e);
 		}
 		return sb.toString();
 	}

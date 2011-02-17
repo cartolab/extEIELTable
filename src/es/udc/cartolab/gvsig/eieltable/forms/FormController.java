@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -23,7 +23,6 @@ package es.udc.cartolab.gvsig.eieltable.forms;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -698,32 +697,18 @@ public class FormController extends Subject
 		}
 	}
 
-	public void updateRows(ArrayList<ArrayList<HashMap<String,Object>>> modRows, ArrayList<HashMap<String,Object>> delRows) {
+	public HashMap<Integer, HashMap<String,Object>> updateRows(ArrayList<ArrayList<HashMap<String,Object>>> modRows, HashMap<Integer, HashMap<String,Object>> newRows, ArrayList<HashMap<String,Object>> delRows) {
 
-		Iterator<ArrayList<HashMap<String,Object>>> iter = modRows.iterator();
+		HashMap<Integer,HashMap<String,Object>> newValues = new HashMap<Integer,HashMap<String,Object>>();
 		ArrayList<HashMap<String,Object>> row;
 		FormsDAO fdao = new FormsDAO();
+		Iterator<ArrayList<HashMap<String,Object>>> iter = modRows.iterator();
 
 		while (iter.hasNext()) {
 			row = iter.next();
 			try {
 				if (row.get(0).size() > 0) {
-					boolean hasKeys = true;
-					Collection<Object> keys;
-					keys = row.get(0).values();
-					Iterator<Object> iterK = keys.iterator();
-					Object next;
-					while(iterK.hasNext()) {
-						next = iterK.next();
-						if ((next == null) || ("".equals(next))) {
-							hasKeys = false;
-						}
-					}
-					if (hasKeys) {
-						fdao.updateEntity(row.get(0), dataBase, table, row.get(1));
-					} else {
-						fdao.insertEntity(row.get(1), dataBase, table);
-					}
+					fdao.updateEntity(row.get(0), dataBase, table, row.get(1));
 				}
 			} catch (FormException e) {
 				// TODO Auto-generated catch block
@@ -731,17 +716,46 @@ public class FormController extends Subject
 			}
 		}
 
-		Iterator<HashMap<String,Object>> iter2 = delRows.iterator();
+		Set<Integer> keys = newRows.keySet();
+		Iterator<Integer> iter2 = keys.iterator();
+		HashMap<String,Object> values = new HashMap<String,Object>();
+		int key;
+		String newId;
 
 		while (iter2.hasNext()) {
+			key = iter2.next();
 			try {
-				fdao.deleteEntity(iter2.next(), dataBase, table);
+				values = newRows.get(key);
+				fdao.insertEntity(values, dataBase, table);
+
+				/*
+				 * TODO We should try to create a more generic method,
+				 * at least with the serial field name obtained through
+				 * a config file.
+				 * A better approach could obtain the serial field name
+				 * from the DB itself.
+				 */
+				newId = fdao.getHighestValue(new HashMap(), dataBase, table, "gid");
+				values.put("gid", newId);
+				newValues.put(key, values);
 			} catch (FormException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
+		Iterator<HashMap<String,Object>> iter3 = delRows.iterator();
+
+		while (iter3.hasNext()) {
+			try {
+				fdao.deleteEntity(iter3.next(), dataBase, table);
+			} catch (FormException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return newValues;
 
 	}
 

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -50,15 +50,15 @@ import es.udc.cartolab.gvsig.eieltable.structure.domain.UserDomain;
  * parsing them for obtaining Domain objects.
  * 
  * @see Domain
- * @see DomainDBReader2
- * @see DomainFileReader2
+ * @see DomainDBReaderCustom
+ * @see DomainFileReaderCustom
  */
-public abstract class DomainGenerator2
+public abstract class DomainGeneratorCustom
 {
 	/**
 	 * Domain database reader used for retrieving domain definitions.
 	 */
-	private static DomainReader2 domainDAO = new DomainDBReader2();
+	private static DomainReaderCustom domainDAO = new DomainDBReaderCustom();
 
 	/**
 	 * Domain parser used for parsing domain xml definitions and creating Domain objects.
@@ -68,7 +68,7 @@ public abstract class DomainGenerator2
 	/**
 	 * Domain database reader used for retrieving domain definitions.
 	 */
-	private static DomainCache2 domainCache = new DomainCache2();
+	private static DomainCacheCustom domainCache = new DomainCacheCustom();
 
 	/**
 	 * Domain Object Retriever.
@@ -183,7 +183,7 @@ public abstract class DomainGenerator2
 		{
 			domain = domainDAO.getDomain(name, esquema, table);
 		}
-		catch (DomainException2 e) {
+		catch (DomainException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Ha ocurrido un error al generar el dominio " + name);
 		}

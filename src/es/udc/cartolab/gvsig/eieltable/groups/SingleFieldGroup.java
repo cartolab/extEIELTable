@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -33,150 +33,168 @@ import es.udc.cartolab.gvsig.eieltable.field.FieldInterface;
 
 public class SingleFieldGroup extends FieldGroup
 {
-  protected ArrayList fields;
-  private JPanel panel;
-  private GridBagConstraints gridbagconst;
+	protected ArrayList fields;
+	private JPanel panel;
+	private GridBagConstraints gridbagconst;
 
-  public SingleFieldGroup(String groupName, String layout)
-  {
-    super(groupName, layout.toUpperCase());
-    this.fields = new ArrayList();
-    this.panel = new JPanel();
+	public SingleFieldGroup(String groupName, String layout)
+	{
+		super(groupName, layout.toUpperCase());
+		this.fields = new ArrayList();
+		this.panel = new JPanel();
 
-    configureLayout();
-    updateLayout();
-  }
+		configureLayout();
+		updateLayout();
+	}
 
-  public JComponent getInterface() {
-    return this.panel;
-  }
+	@Override
+	public JComponent getInterface() {
+		return this.panel;
+	}
 
-  protected void fillFields()
-  {
-    for (int i = 0; i < this.fields.size(); ++i)
-      ((FieldInterface)this.fields.get(i)).fillField();
-  }
+	protected void fillFields()
+	{
+		for (int i = 0; i < this.fields.size(); ++i) {
+			((FieldInterface)this.fields.get(i)).fillField();
+		}
+	}
 
-  public ArrayList getFields()
-  {
-    ArrayList temporalCampos = new ArrayList();
+	@Override
+	public ArrayList getFields()
+	{
+		ArrayList temporalCampos = new ArrayList();
 
-//    fillFields();
-    for (int i = 0; i < this.fields.size(); ++i) {
-      temporalCampos.add(((FieldInterface)this.fields.get(i)).getField());
-    }
+		//    fillFields();
+		for (int i = 0; i < this.fields.size(); ++i) {
+			temporalCampos.add(((FieldInterface)this.fields.get(i)).getField());
+		}
 
-    return temporalCampos;
-  }
+		return temporalCampos;
+	}
 
-  public ArrayList getFieldsInterface()
-  {
-    ArrayList temporalCampos = new ArrayList();
+	@Override
+	public ArrayList getFieldsInterface()
+	{
+		ArrayList temporalCampos = new ArrayList();
 
-//    fillFields();
-    for (int i = 0; i < this.fields.size(); ++i) {
-      temporalCampos.add(this.fields.get(i));
-    }
+		//    fillFields();
+		for (int i = 0; i < this.fields.size(); ++i) {
+			temporalCampos.add(this.fields.get(i));
+		}
 
-    return temporalCampos;
-  }
+		return temporalCampos;
+	}
 
-  public ArrayList getKey()
-  {
-    ArrayList temporalCampos = new ArrayList();
+	@Override
+	public ArrayList getKey()
+	{
+		ArrayList temporalCampos = new ArrayList();
 
-//    fillFields();
+		//    fillFields();
 
-    for (int i = 0; i < this.fields.size(); ++i)
-    {
-      FieldController unCampo = ((FieldInterface)this.fields.get(i)).getField();
-      if (unCampo.getIsKey() == true) {
-        temporalCampos.add(unCampo);
-      }
-    }
+		for (int i = 0; i < this.fields.size(); ++i)
+		{
+			FieldController unCampo = ((FieldInterface)this.fields.get(i)).getField();
+			if (unCampo.getIsKey() == true) {
+				temporalCampos.add(unCampo);
+			}
+		}
 
-    return temporalCampos;
-  }
+		return temporalCampos;
+	}
 
-  public void addField(FieldInterface fieldInterface) {
-    this.fields.add(fieldInterface);
-    if (this.layout.compareTo("FLOWLAYOUT") == 0) {
-      this.panel.add(fieldInterface.getLabel());
-      this.panel.add(fieldInterface.getComponent());
-    } else {
-      this.gridbagconst.gridx = 0;
-      this.panel.add(fieldInterface.getLabel(), this.gridbagconst);
-      this.gridbagconst.gridx = 1;
-      this.panel.add(fieldInterface.getComponent(), this.gridbagconst);
-      updateLayout();
-    }
-  }
+	public void addField(FieldInterface fieldInterface) {
+		this.fields.add(fieldInterface);
+		if (this.layout.compareTo("FLOWLAYOUT") == 0) {
+			this.panel.add(fieldInterface.getLabel());
+			this.panel.add(fieldInterface.getComponent());
+		} else {
+			this.gridbagconst.gridx = 0;
+			this.panel.add(fieldInterface.getLabel(), this.gridbagconst);
+			this.gridbagconst.gridx = 1;
+			this.panel.add(fieldInterface.getComponent(), this.gridbagconst);
+			updateLayout();
+		}
+	}
 
-  protected void configureLayout()
-  {
-    if (this.layout.compareTo("FLOWLAYOUT") == 0) {
-      this.panel.setLayout(new FlowLayout());
-    }
-    else if (this.layout.compareTo("GRIDBAGLAYOUT") == 0) {
-      this.panel.setLayout(new GridBagLayout());
-      this.gridbagconst = new GridBagConstraints();
+	protected void configureLayout()
+	{
+		if (this.layout.compareTo("FLOWLAYOUT") == 0) {
+			this.panel.setLayout(new FlowLayout());
+		}
+		else if (this.layout.compareTo("GRIDBAGLAYOUT") == 0) {
+			this.panel.setLayout(new GridBagLayout());
+			this.gridbagconst = new GridBagConstraints();
 
-      this.gridbagconst.gridy = 0;
-      this.gridbagconst.gridx = 0;
-    }
-  }
+			this.gridbagconst.gridy = 0;
+			this.gridbagconst.gridx = 0;
+		}
+	}
 
-  private void updateLayout()
-  {
-    if (this.layout.compareTo("FLOWLAYOUT") == 0) {
-      return;
-    }
-    if (this.layout.compareTo("GRIDBAGLAYOUT") == 0)
-      this.gridbagconst.gridy += 1;
-  }
+	private void updateLayout()
+	{
+		if (this.layout.compareTo("FLOWLAYOUT") == 0) {
+			return;
+		}
+		if (this.layout.compareTo("GRIDBAGLAYOUT") == 0) {
+			this.gridbagconst.gridy += 1;
+		}
+	}
 
-  public void refresh()
-  {
-    this.panel.setVisible(true);
-  }
+	@Override
+	public void refresh()
+	{
+		this.panel.setVisible(true);
+	}
 
-  public void enableFields(boolean enabled)
-  {
-    for (int i = 0; i < this.fields.size(); ++i)
-      ((FieldInterface)this.fields.get(i)).enableField(enabled);
-  }
+	@Override
+	public void enableFields(boolean enabled)
+	{
+		for (int i = 0; i < this.fields.size(); ++i) {
+			((FieldInterface)this.fields.get(i)).enableField(enabled);
+		}
+	}
 
-  public boolean validate()
-  {
-    boolean esValido = true;
+	@Override
+	public boolean validate()
+	{
+		boolean esValido = true;
 
-    for (int i = 0; i < this.fields.size(); ++i) {
-      esValido &= ((FieldInterface)this.fields.get(i)).validate();
-    }
-    return esValido;
-  }
+		for (int i = 0; i < this.fields.size(); ++i) {
+			esValido &= ((FieldInterface)this.fields.get(i)).validate();
+		}
+		return esValido;
+	}
 
-  public void initFields()
-  {
-    for (int i = 0; i < this.fields.size(); ++i)
-      ((FieldInterface)this.fields.get(i)).loadDefaultValue();
-  }
+	@Override
+	public void initFields()
+	{
+		for (int i = 0; i < this.fields.size(); ++i) {
+			((FieldInterface)this.fields.get(i)).loadDefaultValue();
+		}
+	}
 
-  public void loadData()
-  {
-    for (int i = 0; i < this.fields.size(); ++i)
-      ((FieldInterface)this.fields.get(i)).loadValue();
-  }
+	@Override
+	public void loadData()
+	{
+		for (int i = 0; i < this.fields.size(); ++i) {
+			((FieldInterface)this.fields.get(i)).loadValue();
+		}
+	}
 
-  public void saveInMemory()
-  {
-    for (int i = 0; i < this.fields.size(); ++i)
-      ((FieldInterface)this.fields.get(i)).saveInMemory();
-  }
+	@Override
+	public void saveInMemory()
+	{
+		for (int i = 0; i < this.fields.size(); ++i) {
+			((FieldInterface)this.fields.get(i)).saveInMemory();
+		}
+	}
 
-  public void loadMemory()
-  {
-    for (int i = 0; i < this.fields.size(); ++i)
-      ((FieldInterface)this.fields.get(i)).loadMemory();
-  }
+	@Override
+	public void loadMemory()
+	{
+		for (int i = 0; i < this.fields.size(); ++i) {
+			((FieldInterface)this.fields.get(i)).loadMemory();
+		}
+	}
 }

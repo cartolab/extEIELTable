@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -22,25 +22,27 @@ package es.udc.cartolab.gvsig.eieltable.domain.restriction;
 
 public class NumericFieldRestriction extends Restriction
 {
-  public NumericFieldRestriction(String name)
-  {
-    super(name);
-  }
+	public NumericFieldRestriction(String name)
+	{
+		super(name);
+	}
 
-  public boolean validate(String value)
-  {
-    boolean valido = true;
-    Float prueba;
-    try
-    {
-      prueba = new Float(value);
-    } catch (NumberFormatException e) {
-      valido = false;
-    }
-    return valido;
-  }
+	@Override
+	public boolean validate(String value)
+	{
+		boolean valido = true;
+		Float prueba;
+		try
+		{
+			prueba = new Float(value);
+		} catch (NumberFormatException e) {
+			valido = false;
+		}
+		return valido;
+	}
 
-  public String toString() {
-    return new String("Campo numérico");
-  }
+	@Override
+	public String toString() {
+		return new String("Campo numérico");
+	}
 }

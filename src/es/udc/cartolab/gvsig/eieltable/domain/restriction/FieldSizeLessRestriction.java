@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -22,19 +22,21 @@ package es.udc.cartolab.gvsig.eieltable.domain.restriction;
 
 public class FieldSizeLessRestriction extends Restriction
 {
-  private Integer length;
+	private Integer length;
 
-  public FieldSizeLessRestriction(String name, Integer length)
-  {
-    super(name);
-    this.length = length;
-  }
+	public FieldSizeLessRestriction(String name, Integer length)
+	{
+		super(name);
+		this.length = length;
+	}
 
-  public boolean validate(String value) {
-    return (value.length() < this.length.intValue());
-  }
+	@Override
+	public boolean validate(String value) {
+		return (value.length() < this.length.intValue());
+	}
 
-  public String toString() {
-    return new String("Longitud de campo menor que " + this.length.toString());
-  }
+	@Override
+	public String toString() {
+		return new String("Longitud de campo menor que " + this.length.toString());
+	}
 }

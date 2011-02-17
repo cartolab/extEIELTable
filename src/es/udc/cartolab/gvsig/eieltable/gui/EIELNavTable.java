@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -66,6 +66,7 @@ public class EIELNavTable extends AbstractNavTable {
 	}
 
 
+	@Override
 	public boolean init() {
 		JPanel centerPanel = getCenterPanel();
 		if (centerPanel != null) {
@@ -223,8 +224,8 @@ public class EIELNavTable extends AbstractNavTable {
 
 	public void open() {
 		PluginServices.getMDIManager().addCentredWindow(this);
-//		FieldInterface field = getFocusField();
-//		field.getComponent().requestFocusInWindow();
+		//		FieldInterface field = getFocusField();
+		//		field.getComponent().requestFocusInWindow();
 	}
 
 }

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  * 
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  * 
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -26,18 +26,18 @@ import es.udc.cartolab.gvsig.eieltable.domain.Domain;
 
 public class DomainCache
 {
-  private HashMap cache;
+	private HashMap cache;
 
-  public DomainCache()
-  {
-    this.cache = new HashMap();
-  }
+	public DomainCache()
+	{
+		this.cache = new HashMap();
+	}
 
-  public void addDomain(String name, Domain domain) {
-    this.cache.put(name, domain);
-  }
+	public void addDomain(String name, Domain domain) {
+		this.cache.put(name, domain);
+	}
 
-  public Domain getDomain(String name) {
-    return ((Domain)this.cache.get(name));
-  }
+	public Domain getDomain(String name) {
+		return ((Domain)this.cache.get(name));
+	}
 }

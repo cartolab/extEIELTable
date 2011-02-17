@@ -1,79 +1,76 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
- * 
- * This file is part of extEIELForms
- * 
+ *
+ * This file is part of extEIELTable
+ *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
- * 
+ *
  * extEIELForms is free software: you can redistribute it and/or modify it under the terms
  * of the GNU General Public License as published by the Free Software Foundation, either
  * version 3 of the License, or any later version.
- * 
+ *
  * extEIELForms is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with extEIELForms.
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
 package es.udc.cartolab.gvsig.eieltable.domain.generator;
 
-import java.util.HashMap;
-
 import es.udc.cartolab.gvsig.eieltable.structure.domain.Domain;
 
-
 /**
- * Domain Cache.
+ * Domain Retrieval Exception.
  * 
- * Class used as a cache for previously retrieved domains.
+ * Exception thrown when we have any problem
+ * while retrieving or parsing a domain.
  * 
  * @see Domain
+ * @see DomainReaderCustom
  */
-public class DomainCache2
-{
+public class DomainException extends Exception {
 
 	/**
-	 * HashMap used for storing the cache.
-	 */
-	private HashMap cache;
-
-	/**
-	 * Domain Cache Constructor.
+	 * Domain Retrieval Exception Generic Exception Based Constructor.
 	 * 
-	 * This is the public constructor for Domain Cache, which takes no arguments.
+	 * Constructor which accepts a generic Exception
+	 * for creating a Domain Exception based on it.
 	 * 
-	 * @return A new  DomainCache.
+	 * @param e the exception we want to create the DomainException based on.
+	 * 
+	 * @returns A new DomainException.
+	 * 
+	 * @see Exception
 	 */
-	public DomainCache2()
-	{
-		this.cache = new HashMap();
+	public DomainException(Exception e) {
+		super(e);
 	}
 
 	/**
-	 * Cache domain adder.
+	 * Domain Retrieval Exception Constructor.
 	 * 
-	 * This function adds a domain to the cache with the given name.
+	 * Constructor for creating a default Domain Exception.
 	 * 
-	 * @param name the name we want to register the domain with.
-	 * @param domain the domain we want to register.
+	 * @returns A new DomainException.
 	 */
-	public void addDomain(String name, Domain domain) {
-		this.cache.put(name, domain);
+	public DomainException() {
+		super();
 	}
 
 	/**
-	 * Cache domain retriever.
+	 * Domain Retrieval Exception Constructor.
 	 * 
-	 * This function retrieves a domain from the cache with the given name.
+	 * Constructor which accepts an error message for
+	 * creating a Domain Exception with it.
 	 * 
-	 * @param name the name of the Domain we want to retrieve.
+	 * @param msg error message we want the Domain Exception to contain.
 	 * 
-	 * @return The Domain for the given name.
+	 * @returns A new DomainException.
 	 */
-	public Domain getDomain(String name) {
-		return ((Domain)this.cache.get(name));
+	public DomainException(String msg) {
+		super(msg);
 	}
 }

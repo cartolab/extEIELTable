@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2010. Cartolab (Universidade da Coruña)
  *
- * This file is part of extEIELForms
+ * This file is part of extEIELTable
  *
  * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
  * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
@@ -24,20 +24,13 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.StringReader;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.xml.parsers.DocumentBuilder;
@@ -61,17 +54,14 @@ import es.udc.cartolab.gvsig.eieltable.formgenerator.FormException;
 import es.udc.cartolab.gvsig.eieltable.formgenerator.FormGenerator;
 import es.udc.cartolab.gvsig.eieltable.forms.FormController;
 import es.udc.cartolab.gvsig.eieltable.util.FormsDAO;
-import es.udc.cartolab.gvsig.eielutils.constants.Constants;
-import es.udc.cartolab.gvsig.users.utils.DBSession;
 
 public class AlphanumericForm extends JPanel implements IWindow, ActionListener {
 
 	protected String formName;
 	private WindowInfo viewInfo;
 	private JPanel southPanel;
-	private JScrollPane centerPanel;
 	protected FormController form;
-	protected HashMap<String, String> key = new HashMap();
+	protected HashMap<String, String> key = new HashMap<String,String>();
 	private JButton saveButton, newButton, closeButton, delButton;
 
 
@@ -160,30 +150,8 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 		}
 	}
 
-	private JScrollPane getCenterPanel() throws FormException {
-		if (centerPanel == null) {
-
-			if (form == null) {
-				FormGenerator fg = new FormGenerator();
-				form = fg.createFormController(formName);
-				addPKChangeListener();
-			}
-			centerPanel = new JScrollPane(form.getInterface());
-			centerPanel.setBorder(new EmptyBorder(0,0,0,0));
-
-		}
-		return centerPanel;
-	}
-
 	private TableFrame getCenterTable() {
 		FormDBReader formDAO = new FormDBReader();
-		String xml = "";
-		try {
-			xml = formDAO.getFormDefinition(formName);
-		} catch (FormException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		try {
 			if (form == null) {
 				FormGenerator fg = new FormGenerator();
@@ -211,18 +179,20 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 	protected JPanel getButtonsPanel() {
 		if (southPanel == null) {
 			southPanel = new JPanel();
-			saveButton = new JButton("Guardar");
-			saveButton.addActionListener(this);
-			southPanel.add(saveButton);
 			newButton = new JButton("Nuevo registro");
 			newButton.addActionListener(this);
 			southPanel.add(newButton);
 			delButton = new JButton("Borrar registros");
 			delButton.addActionListener(this);
 			southPanel.add(delButton);
+			saveButton = new JButton("Guardar");
+			saveButton.addActionListener(this);
+			southPanel.add(saveButton);
 			closeButton = new JButton("Cerrar");
 			closeButton.addActionListener(this);
 			southPanel.add(closeButton);
+			southPanel.setMinimumSize(southPanel.getPreferredSize());
+			southPanel.setMaximumSize(southPanel.getPreferredSize());
 		}
 		return southPanel;
 	}
@@ -315,44 +285,6 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 
 	}
 
-	private String getWhereClause() throws SQLException {
-		DBSession dbs = DBSession.getCurrentSession();
-		String where =" WHERE ";
-		Constants c = Constants.getCurrentConstants();
-		if (dbs!=null && c.constantsSelected()) {
-			List<String> cols = Arrays.asList(dbs.getColumns(form.getDataBase(), form.getTable()));
-
-			ArrayList<String> upperCols = new ArrayList<String>();
-			for (String column : cols) {
-				upperCols.add(column.toUpperCase());
-			}
-
-			ArrayList<String> constants = new ArrayList<String>();
-			constants.add("FASE");
-			constants.add("PROVINCIA");
-			constants.add("MUNICIPIO");
-			constants.add("ENTIDAD");
-			constants.add("NUCLEO");
-
-			int constn = 0;
-			for (String constant : constants) {
-				int pos = upperCols.indexOf(constant);
-				if (pos>-1 && c.getValue(constant) != null) {
-					constn++;
-					where = where + cols.get(pos) + "='" + c.getValue(constant) + "' AND ";
-				}
-			}
-
-			if (constn>0) {
-				where = where.substring(0, where.length()-5);
-			} else {
-				where = "";
-			}
-		}
-		return where;
-	}
-
-
 	private String getFirstKey(String keyName) throws FormException {
 
 		FormsDAO fdao = new FormsDAO();
@@ -378,45 +310,17 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 		PluginServices.getMDIManager().closeWindow(this);
 	}
 
-	private void checkModifiedRows() {
-		TableFrame table = (TableFrame) this.getComponent(0);
-
-		ArrayList<ArrayList<HashMap<String,Object>>> modified = table.getModifiedRows();
-
-		Iterator<ArrayList<HashMap<String,Object>>> iter = modified.iterator();
-
-		while(iter.hasNext()) {
-			ArrayList<HashMap<String,Object>> row = iter.next();
-			HashMap<String,Object> keys = row.get(0);
-			HashMap<String,Object> values = row.get(1);
-			Set<String> keysK = keys.keySet();
-			Set<String> valuesK = values.keySet();
-
-			System.out.println("Claves: ");
-			Iterator<String> iterK = keysK.iterator();
-			while(iterK.hasNext()) {
-				String key = iterK.next();
-				System.out.println(key + ": " + keys.get(key));
-			}
-
-			System.out.println("Valores: ");
-			Iterator<String> iterV = valuesK.iterator();
-			while(iterV.hasNext()) {
-				String key = iterV.next();
-				System.out.println(key + ": " + values.get(key));
-			}
-		}
-
-	}
-
 	private void saveModifiedRows() {
 
 		TableFrame table = (TableFrame) this.getComponent(0);
 
 		ArrayList<ArrayList<HashMap<String,Object>>> modified = table.getModifiedRows();
+		HashMap<Integer,HashMap<String,Object>> created = table.getNewRows();
 		ArrayList<HashMap<String,Object>> deleted = table.getDeletedRows();
 
-		form.updateRows(modified, deleted);
+		HashMap<Integer,HashMap<String,Object>> newValues = form.updateRows(modified, created, deleted);
+
+		table.setSavedValues(newValues);
 
 		table.clearPendingChanges();
 

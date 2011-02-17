@@ -1,3 +1,23 @@
+/*
+ * Copyright (c) 2010. Cartolab (Universidade da Coruña)
+ *
+ * This file is part of extEIELTable
+ *
+ * extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
+ * devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
+ *
+ * extEIELForms is free software: you can redistribute it and/or modify it under the terms
+ * of the GNU General Public License as published by the Free Software Foundation, either
+ * version 3 of the License, or any later version.
+ *
+ * extEIELForms is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with extEIELForms.
+ * If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package es.udc.cartolab.gvsig.eieltable.gui;
 
 import java.awt.Component;
@@ -9,14 +29,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SortOrder;
-import javax.swing.RowSorter.SortKey;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -229,7 +248,11 @@ public class TableFrame extends JPanel {
 					break;
 				}*/
 				if (fields.get(i).getDomain().getName().equals("Autonumerico")) {
-					keys.put(fields.get(i).getName(), this.table.getModel().getValueAt(n, i));
+					if ((table.getModel().getValueAt(n, i) == null) || ("".equals(table.getModel().getValueAt(n, i)))) {
+						continue;
+					} else {
+						keys.put(fields.get(i).getName(), this.table.getModel().getValueAt(n, i));
+					}
 				} else {
 					values.put(fields.get(i).getName(), this.table.getModel().getValueAt(n, i));
 				}
@@ -241,6 +264,45 @@ public class TableFrame extends JPanel {
 			row.add(keys);
 			row.add(values);
 			results.add(row);
+		}
+
+		return results;
+	}
+
+	public HashMap<Integer,HashMap<String,Object>> getNewRows() {
+		HashSet<Integer> aux = modified;
+		//modified.clear();
+		Iterator<Integer> iter = aux.iterator();
+
+		HashMap<Integer,HashMap<String,Object>> results = new HashMap<Integer,HashMap<String,Object>>();
+
+		while (iter.hasNext()) {
+			HashMap<String,Object> values = new HashMap<String,Object>();
+			int i, n = iter.next();
+			boolean newRow = true;
+			//boolean complete = true;
+
+			for (i=0; i<fields.size(); i++) {
+				/*if (this.table.getModel().getValueAt(n, i) == null) {
+						complete = false;
+						break;
+					}*/
+				if (fields.get(i).getDomain().getName().equals("Autonumerico")) {
+					if (!((table.getModel().getValueAt(n, i) == null) || ("".equals(table.getModel().getValueAt(n, i))))) {
+						newRow = false;
+					}
+				} else {
+					values.put(fields.get(i).getName(), this.table.getModel().getValueAt(n, i));
+				}
+
+				/*if (!complete) {
+					continue;
+				}*/
+			}
+
+			if (newRow) {
+				results.put(n, values);
+			}
 		}
 
 		return results;
@@ -263,9 +325,9 @@ public class TableFrame extends JPanel {
 		int row = ((MyTableModel) this.table.getModel()).createRow();
 
 		TableRowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>((MyTableModel)table.getModel());
-		List <SortKey> sortKeys = new ArrayList<SortKey>();
+		/*List <SortKey> sortKeys = new ArrayList<SortKey>();
 		sortKeys.add(new SortKey(0, SortOrder.ASCENDING));
-		table.setRowSorter(sorter);
+		table.setRowSorter(sorter);*/
 		table.scrollRectToVisible(table.getCellRect(row, 0, true));
 		table.getSelectionModel().setSelectionInterval(row, row);
 
@@ -359,6 +421,25 @@ public class TableFrame extends JPanel {
 		}
 
 		modified = aux;*/
+	}
+
+	public void setSavedValues(HashMap<Integer,HashMap<String,Object>> values) {
+		Set<Integer> rows = values.keySet();
+		Iterator<Integer> iter = rows.iterator();
+		while (iter.hasNext()) {
+			int key = iter.next();
+			HashMap<String,Object> rowValues = values.get(key);
+			Iterator<String> iter2 = rowValues.keySet().iterator();
+
+			while(iter2.hasNext()) {
+				String field = iter2.next();
+				for(int i = 0; i < this.fields.size(); i++) {
+					if (this.fields.get(i).getName().equals(field)) {
+						((MyTableModel) this.table.getModel()).setValueAt(rowValues.get(field), key, i);
+					}
+				}
+			}
+		}
 	}
 
 	public void clearPendingChanges() {
