@@ -92,7 +92,7 @@ public class DomainDBReaderCustom extends DomainReaderCustom {
 		Connection connection = null;
 
 		String queryString = "select definicion from \"" + this.applicationSchemaName + "\".dominios ";
-		queryString = queryString + "where nombre = ?";
+		queryString = queryString + "where initcap(nombre) = initcap( ? )";
 		String domainXMLDefinition;
 		DBSession dbs = DBSession.getCurrentSession();
 		if (dbs != null) {
