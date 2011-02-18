@@ -36,6 +36,8 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SortOrder;
+import javax.swing.RowSorter.SortKey;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -271,9 +273,13 @@ public class TableFrame extends JPanel {
 	}
 
 	public void createRow() {
-		int row = ((MyTableModel) this.table.getModel()).createRow();
-
 		TableRowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>((MyTableModel)table.getModel());
+		ArrayList<SortKey> sortKeys = new ArrayList<SortKey>();
+		sortKeys.add(new SortKey(0, SortOrder.DESCENDING));
+		sorter.setSortKeys(sortKeys);
+		table.setRowSorter(sorter);
+
+		int row = ((MyTableModel) this.table.getModel()).createRow();
 		table.scrollRectToVisible(table.getCellRect(row, 0, true));
 		table.getSelectionModel().setSelectionInterval(row, row);
 
