@@ -921,15 +921,4 @@ public class FormController extends Subject
 
 	}
 
-	//  public void addEntitiesPanel(SelectEntityPanel selectEntityPanel) {
-	//    this.formInterface.addEntitiesPanel(selectEntityPanel);
-	//  }
-
-	//  public void showEntitiesPanel(boolean visible) {
-	//    this.formInterface.showEntitiesPanel(visible);
-	//  }
-
-	//  public void fillEntitiesPanel(Collection entityIds, Integer defaultEntity) {
-	//    this.formInterface.fillEntitiesPanel(entityIds, defaultEntity);
-	//  }
 }

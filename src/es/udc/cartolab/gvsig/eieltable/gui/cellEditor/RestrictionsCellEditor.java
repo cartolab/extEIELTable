@@ -30,7 +30,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.Restriction2;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.RestrictionCustom;
 
 
 
@@ -46,7 +46,7 @@ public class RestrictionsCellEditor extends DefaultCellEditor
 	/**
 	 * Restrictions this editor must take into account before saving.
 	 */
-	private ArrayList<Restriction2> restrictions;
+	private ArrayList<RestrictionCustom> restrictions;
 
 	/**
 	 * Restrictions Based Cell Editor Constructor.
@@ -58,7 +58,7 @@ public class RestrictionsCellEditor extends DefaultCellEditor
 	 * 
 	 * @return A new RestrictionsCellEditor.
 	 */
-	public RestrictionsCellEditor(ArrayList<Restriction2> restrictions)
+	public RestrictionsCellEditor(ArrayList<RestrictionCustom> restrictions)
 	{
 		super(new JTextField()); //make the superclass based on a JTextField
 		this.restrictions = restrictions;

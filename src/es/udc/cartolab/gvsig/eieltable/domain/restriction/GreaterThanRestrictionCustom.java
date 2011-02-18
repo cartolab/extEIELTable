@@ -27,7 +27,7 @@ package es.udc.cartolab.gvsig.eieltable.domain.restriction;
  * is higher (>) than a given number.
  * 
  */
-public class GreaterThanRestriction2 extends NumericFieldRestriction2
+public class GreaterThanRestrictionCustom extends NumericFieldRestrictionCustom
 {
 	/**
 	 * The minimum value.
@@ -45,7 +45,7 @@ public class GreaterThanRestriction2 extends NumericFieldRestriction2
 	 * 
 	 * @return a new GreaterThanRestriction.
 	 */
-	public GreaterThanRestriction2(String name, Float value)
+	public GreaterThanRestrictionCustom(String name, Float value)
 	{
 		super(name);
 		this.myValue = value;

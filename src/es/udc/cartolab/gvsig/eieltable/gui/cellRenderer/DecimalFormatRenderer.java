@@ -30,8 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.DecimalSizeRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.Restriction2;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.DecimalSizeRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.RestrictionCustom;
 
 
 
@@ -53,7 +53,7 @@ public class DecimalFormatRenderer extends DefaultTableCellRenderer {
 	 * The public constructor, which accepts an ArrayList of Restrictions
 	 * in order to set the formatter with the proper number of decimals.
 	 */
-	public DecimalFormatRenderer(ArrayList<Restriction2> restrictions, boolean editable) {
+	public DecimalFormatRenderer(ArrayList<RestrictionCustom> restrictions, boolean editable) {
 		super();
 		this.setHorizontalAlignment(JLabel.RIGHT);
 
@@ -65,9 +65,9 @@ public class DecimalFormatRenderer extends DefaultTableCellRenderer {
 		String format = "0.";
 		int decimals = 0;
 		for (i=0; i<restrictions.size(); i++) {
-			if (restrictions.get(i) instanceof DecimalSizeRestriction2) {
-				if (((DecimalSizeRestriction2) restrictions.get(i)).getDecimalSize() > decimals) {
-					decimals = ((DecimalSizeRestriction2) restrictions.get(i)).getDecimalSize();
+			if (restrictions.get(i) instanceof DecimalSizeRestrictionCustom) {
+				if (((DecimalSizeRestrictionCustom) restrictions.get(i)).getDecimalSize() > decimals) {
+					decimals = ((DecimalSizeRestrictionCustom) restrictions.get(i)).getDecimalSize();
 				}
 			}
 		}

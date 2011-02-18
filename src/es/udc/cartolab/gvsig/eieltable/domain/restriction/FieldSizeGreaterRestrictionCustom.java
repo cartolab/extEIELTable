@@ -27,7 +27,7 @@ package es.udc.cartolab.gvsig.eieltable.domain.restriction;
  * is longer (>) than a given length.
  * 
  */
-public class FieldSizeGreaterRestriction2 extends Restriction2
+public class FieldSizeGreaterRestrictionCustom extends RestrictionCustom
 {
 	/**
 	 * The minimum length.
@@ -45,7 +45,7 @@ public class FieldSizeGreaterRestriction2 extends Restriction2
 	 * 
 	 * @return a new FieldSizeGreaterRestriction.
 	 */
-	public FieldSizeGreaterRestriction2(String name, Integer length)
+	public FieldSizeGreaterRestrictionCustom(String name, Integer length)
 	{
 		super(name);
 		this.length = length;

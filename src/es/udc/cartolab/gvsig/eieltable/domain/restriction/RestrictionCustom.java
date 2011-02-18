@@ -20,58 +20,49 @@
 
 package es.udc.cartolab.gvsig.eieltable.domain.restriction;
 
+
 /**
- * Less Than Restriction.
+ * Restriction.
  * 
- * Restriction which checks whether the passed value
- * is lower (<) than a given number.
+ * Class used for defining restrictions which can be applied to Domains
+ * in order to restrict their values.
  * 
  */
-public class LessThanRestriction2 extends NumericFieldRestriction2
+public abstract class RestrictionCustom
 {
 	/**
-	 * The maximum value.
+	 * The name of the Restriction.
 	 */
-	private Float myValue;
+	private String name;
 
 	/**
-	 * Less Than Restriction Constructor.
+	 * Restriction Constructor.
 	 * 
-	 * Constructor which accepts a name for the Restriction,
-	 * and the decimal max value as a Float.
+	 * Constructor which accepts a name for the Restriction.
 	 * 
 	 * @param name the name we want for the Restriction.
-	 * @param value the max value as a Float.
 	 * 
-	 * @return a new LessThanRestriction.
+	 * @return a new Restriction.
 	 */
-	public LessThanRestriction2(String name, Float value)
+	public RestrictionCustom(String name)
 	{
-		super(name);
-		this.myValue = value;
+		this.name = name;
 	}
 
-	@Override
-	public boolean validate(String value) {
-		boolean valido = true;
-		try
-		{
-			Float valorAux = new Float(value);
-			if (valorAux.compareTo(this.myValue) < 0) {
-				valido = true;
-			} else {
-				valido = false;
-			}
-		}
-		catch (NumberFormatException e)
-		{
-			valido = false;
-		}
-		return valido;
-	}
+	/**
+	 * Validator.
+	 * 
+	 * Function used for checking the Restriction onto a value.
+	 * 
+	 * @param paramString the value we want to check the Restriction onto.
+	 * 
+	 * @return A boolean which says whether the value fulfills the Restriction
+	 * or it doesn't.
+	 */
+	public abstract boolean validate(String paramString);
 
 	@Override
 	public String toString() {
-		return new String("El valor del campo debe ser menor que " + this.myValue.toString());
+		return new String("Restriction " + this.name);
 	}
 }

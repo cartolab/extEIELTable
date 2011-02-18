@@ -28,7 +28,7 @@ package es.udc.cartolab.gvsig.eieltable.domain.restriction;
  * 0 decimals, it will try to cast the value as an Integer).
  * 
  */
-public class DecimalSizeRestriction2 extends NumericFieldRestriction2
+public class DecimalSizeRestrictionCustom extends NumericFieldRestrictionCustom
 {
 	/**
 	 * The maximum number of decimals.
@@ -46,7 +46,7 @@ public class DecimalSizeRestriction2 extends NumericFieldRestriction2
 	 * 
 	 * @return a new DecimalSizeRestriction.
 	 */
-	public DecimalSizeRestriction2(String name, Integer decimalSize)
+	public DecimalSizeRestrictionCustom(String name, Integer decimalSize)
 	{
 		super(name);
 		this.decimalSize = decimalSize;

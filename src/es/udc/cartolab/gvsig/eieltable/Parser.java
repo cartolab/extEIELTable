@@ -373,34 +373,4 @@ public abstract class Parser {
 
 	}
 
-	/*public static void printResults(FormXmlParsingResults results) {
-
-		int i;
-		printConfig(results.getConfigurationValues());
-
-		ArrayList<Group> groups = results.getGroups();
-		SubGroup subGroup;
-
-		if (!groups.isEmpty()) {
-			for (i=0; i<groups.size(); i++) {
-				System.out.println("Grupo " + groups.get(i).getName() + " | Layout " + groups.get(i).getLayout());
-				subGroup = groups.get(i).getSubGroup();
-				if (subGroup instanceof SimpleGroup) {
-					printSimpleGroup((SimpleGroup) subGroup);
-				} else {
-					printComplexGroup((ComplexGroup) subGroup);
-				}
-			}
-		}
-
-		ArrayList<Dependency> dependencies = results.getDependencies();
-
-		if (!dependencies.isEmpty()) {
-			for (i=0; i<dependencies.size(); i++) {
-				printDependency(dependencies.get(i));
-			}
-		}
-
-	}*/
-
 }

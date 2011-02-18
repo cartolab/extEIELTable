@@ -225,7 +225,6 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 
 		try {
 			add(getCenterTable());
-			//add(getCenterPanel());
 			add(getButtonsPanel());
 			if (setKey()) {
 				fillValues();
@@ -351,15 +350,11 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 
 		if (arg0.getSource() == newButton) {
 			this.createNewRow();
-			/*EditAlphanumericForm eaf = new EditAlphanumericForm(this, formName);
-			eaf.open();*/
 		}
 
 		if (arg0.getSource() == delButton) {
 			this.deleteRows();
 			this.repaint();
-			/*EditAlphanumericForm eaf = new EditAlphanumericForm(this, formName);
-			eaf.open();*/
 		}
 
 		if (arg0.getSource() == closeButton) {

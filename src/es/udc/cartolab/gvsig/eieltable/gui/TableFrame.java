@@ -122,38 +122,6 @@ public class TableFrame extends JPanel {
 	 * contents, then you can just use column.sizeWidthToFit().
 	 */
 	private void initColumnSizes(JTable table) {
-		/*MyTableModel model = (MyTableModel)table.getModel();
-		TableColumn column = null;
-		Component comp = null;
-		int headerWidth = 0;
-		int cellWidth = 0;
-		Object[] longValues = model.longValues;
-		TableCellRenderer headerRenderer =
-			table.getTableHeader().getDefaultRenderer();
-
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			column = table.getColumnModel().getColumn(i);
-
-			comp = headerRenderer.getTableCellRendererComponent(
-					null, column.getHeaderValue(),
-					false, false, 0, 0);
-			headerWidth = comp.getPreferredSize().width;
-
-			comp = table.getDefaultRenderer(model.getColumnClass(i)).
-			getTableCellRendererComponent(
-					table, longValues[i],
-					false, false, 0, i);
-			cellWidth = comp.getPreferredSize().width;
-
-			if (DEBUG) {
-				System.out.println("Initializing width of column "
-						+ i + ". "
-						+ "headerWidth = " + headerWidth
-						+ "; cellWidth = " + cellWidth);
-			}
-
-			column.setPreferredWidth(Math.max(headerWidth, cellWidth));
-		}*/
 
 		TableColumn column = null;
 		Component comp = null;
@@ -230,7 +198,6 @@ public class TableFrame extends JPanel {
 
 	public ArrayList<ArrayList<HashMap<String,Object>>> getModifiedRows() {
 		HashSet<Integer> aux = modified;
-		//modified.clear();
 		Iterator<Integer> iter = aux.iterator();
 
 		ArrayList<ArrayList<HashMap<String,Object>>> results = new ArrayList<ArrayList<HashMap<String,Object>>>();
@@ -240,27 +207,19 @@ public class TableFrame extends JPanel {
 			HashMap<String,Object> values = new HashMap<String,Object>();
 			ArrayList<HashMap<String,Object>> row = new ArrayList<HashMap<String,Object>>();
 			int i, n = iter.next();
-			//boolean complete = true;
 
 			for (i=0; i<fields.size(); i++) {
-				/*if (this.table.getModel().getValueAt(n, i) == null) {
-					complete = false;
-					break;
-				}*/
 				if (fields.get(i).getDomain().getName().equals("Autonumerico")) {
-					if ((table.getModel().getValueAt(n, i) == null) || ("".equals(table.getModel().getValueAt(n, i)))) {
+					if ((((MyTableModel) table.getModel()).getInnerValueAt(n, i) == null) || ("".equals(((MyTableModel) table.getModel()).getInnerValueAt(n, i)))) {
 						continue;
 					} else {
-						keys.put(fields.get(i).getName(), this.table.getModel().getValueAt(n, i));
+						keys.put(fields.get(i).getName(), ((MyTableModel) table.getModel()).getInnerValueAt(n, i));
 					}
 				} else {
-					values.put(fields.get(i).getName(), this.table.getModel().getValueAt(n, i));
+					values.put(fields.get(i).getName(), ((MyTableModel) table.getModel()).getInnerValueAt(n, i));
 				}
 			}
 
-			/*if (!complete) {
-				continue;
-			}*/
 			row.add(keys);
 			row.add(values);
 			results.add(row);
@@ -280,13 +239,8 @@ public class TableFrame extends JPanel {
 			HashMap<String,Object> values = new HashMap<String,Object>();
 			int i, n = iter.next();
 			boolean newRow = true;
-			//boolean complete = true;
 
 			for (i=0; i<fields.size(); i++) {
-				/*if (this.table.getModel().getValueAt(n, i) == null) {
-						complete = false;
-						break;
-					}*/
 				if (fields.get(i).getDomain().getName().equals("Autonumerico")) {
 					if (!((table.getModel().getValueAt(n, i) == null) || ("".equals(table.getModel().getValueAt(n, i))))) {
 						newRow = false;
@@ -294,10 +248,6 @@ public class TableFrame extends JPanel {
 				} else {
 					values.put(fields.get(i).getName(), this.table.getModel().getValueAt(n, i));
 				}
-
-				/*if (!complete) {
-					continue;
-				}*/
 			}
 
 			if (newRow) {
@@ -310,7 +260,6 @@ public class TableFrame extends JPanel {
 
 	public ArrayList<HashMap<String,Object>> getDeletedRows() {
 		HashMap<Integer,HashMap<String,Object>> aux = deleted;
-		//modified.clear();
 		Iterator<HashMap<String,Object>> iter = aux.values().iterator();
 		ArrayList<HashMap<String,Object>> results = new ArrayList<HashMap<String,Object>>();
 
@@ -325,32 +274,9 @@ public class TableFrame extends JPanel {
 		int row = ((MyTableModel) this.table.getModel()).createRow();
 
 		TableRowSorter<MyTableModel> sorter = new TableRowSorter<MyTableModel>((MyTableModel)table.getModel());
-		/*List <SortKey> sortKeys = new ArrayList<SortKey>();
-		sortKeys.add(new SortKey(0, SortOrder.ASCENDING));
-		table.setRowSorter(sorter);*/
 		table.scrollRectToVisible(table.getCellRect(row, 0, true));
 		table.getSelectionModel().setSelectionInterval(row, row);
 
-		/*Iterator<Integer> iter = this.modified.iterator();
-
-		HashSet<Integer> aux = new HashSet<Integer>();
-
-		Integer i;
-
-		while (iter.hasNext()) {
-			i = iter.next();
-			System.out.println("Old: " + i);
-			aux.add(i + 1);
-		}
-
-		iter = aux.iterator();
-
-		while (iter.hasNext()) {
-			i = iter.next();
-			System.out.println("New: " + i);
-		}
-
-		modified = aux;*/
 	}
 
 	public void deleteSelectedRows() {
@@ -400,27 +326,6 @@ public class TableFrame extends JPanel {
 
 			((MyTableModel) this.table.getModel()).deleteRow(rowC, rows[i]);
 		}
-
-		/*Iterator<Integer> iter = this.modified.iterator();
-
-		HashSet<Integer> aux = new HashSet<Integer>();
-
-		Integer i;
-
-		while (iter.hasNext()) {
-			i = iter.next();
-			System.out.println("Old: " + i);
-			aux.add(i + 1);
-		}
-
-		iter = aux.iterator();
-
-		while (iter.hasNext()) {
-			i = iter.next();
-			System.out.println("New: " + i);
-		}
-
-		modified = aux;*/
 	}
 
 	public void setSavedValues(HashMap<Integer,HashMap<String,Object>> values) {
@@ -483,31 +388,11 @@ public class TableFrame extends JPanel {
 			data.add(longValues.clone());
 			fireTableRowsInserted(data.size()-1,data.size()-1);
 			return data.size()-1;
-			/*this.insertRow(0, longValues.clone());
-			this.newRowsAdded(new TableModelEvent(this, 0));*/
 		}
 
 		public void deleteRow(int modelRow, int row) {
-			/*Set<Integer> keyNames = keys.keySet();
-			int index, i = 0;
-			/*for (i = 0; i < data.size(); i++) {
-				Iterator<Integer> iter = keyNames.iterator();
-				boolean deleted = true;
-				while (iter.hasNext()) {
-					index = iter.next();
-					if (!data.get(i)[index].equals(keys.get(index))) {
-						deleted = false;
-					}
-				}
-				if (deleted) {
-					//this.data.remove(i);
-					break;
-				}
-			}*/
-			//this.removeRow(row);
 			this.data.remove(modelRow);
 			fireTableRowsDeleted(modelRow, modelRow);
-			//this.rowsRemoved(new TableModelEvent(this, row));
 		}
 
 		public void setLongValues(Object [] longValues) {
@@ -530,6 +415,13 @@ public class TableFrame extends JPanel {
 		@Override
 		public String getColumnName(int col) {
 			return fields.get(col).getLabel();
+		}
+
+		public Object getInnerValueAt(int row, int col) {
+			if ((fields.get(col).getDomain().getType().equals("basico")) && (fields.get(col).getDomain().getName().startsWith("numerico")) && !(fields.get(col).getDomain().toString().startsWith("int"))) {
+				return Double.valueOf((String)data.get(row)[col]);
+			}
+			return data.get(row)[col];
 		}
 
 		@Override

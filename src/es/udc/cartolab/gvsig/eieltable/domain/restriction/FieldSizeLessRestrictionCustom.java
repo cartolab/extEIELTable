@@ -20,49 +20,44 @@
 
 package es.udc.cartolab.gvsig.eieltable.domain.restriction;
 
-
 /**
- * Restriction.
+ * Field Size Less Restriction.
  * 
- * Class used for defining restrictions which can be applied to Domains
- * in order to restrict their values.
+ * Restriction which checks whether the passed value
+ * is shorter (<) than a given length.
  * 
  */
-public abstract class Restriction2
+public class FieldSizeLessRestrictionCustom extends RestrictionCustom
 {
 	/**
-	 * The name of the Restriction.
+	 * The maximum length.
 	 */
-	private String name;
+	private Integer length;
 
 	/**
-	 * Restriction Constructor.
+	 * Field Size Less Restriction Constructor.
 	 * 
-	 * Constructor which accepts a name for the Restriction.
+	 * Constructor which accepts a name for the Restriction,
+	 * and the maximum length as an Integer.
 	 * 
 	 * @param name the name we want for the Restriction.
+	 * @param length the maximum length as an Integer.
 	 * 
-	 * @return a new Restriction.
+	 * @return a new FieldSizeLessRestriction.
 	 */
-	public Restriction2(String name)
+	public FieldSizeLessRestrictionCustom(String name, Integer length)
 	{
-		this.name = name;
+		super(name);
+		this.length = length;
 	}
 
-	/**
-	 * Validator.
-	 * 
-	 * Function used for checking the Restriction onto a value.
-	 * 
-	 * @param paramString the value we want to check the Restriction onto.
-	 * 
-	 * @return A boolean which says whether the value fulfills the Restriction
-	 * or it doesn't.
-	 */
-	public abstract boolean validate(String paramString);
+	@Override
+	public boolean validate(String value) {
+		return (value.length() < this.length.intValue());
+	}
 
 	@Override
 	public String toString() {
-		return new String("Restriction " + this.name);
+		return new String("Longitud de campo menor que " + this.length.toString());
 	}
 }

@@ -29,14 +29,14 @@ import org.apache.xerces.parsers.DOMParser;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.DecimalSizeRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.FieldSizeEqualRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.FieldSizeGreaterRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.FieldSizeLessRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.GreaterThanRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.LessThanRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.NumericFieldRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.Restriction2;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.DecimalSizeRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.FieldSizeEqualRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.FieldSizeGreaterRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.FieldSizeLessRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.GreaterThanRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.LessThanRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.NumericFieldRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.RestrictionCustom;
 import es.udc.cartolab.gvsig.eieltable.structure.domain.BasicDomain;
 import es.udc.cartolab.gvsig.eieltable.structure.domain.Domain;
 import es.udc.cartolab.gvsig.eieltable.structure.domain.UserDomain;
@@ -206,7 +206,7 @@ public abstract class DomainGeneratorCustom
 	{
 		String basicType = "";
 
-		ArrayList<Restriction2> restricciones = new ArrayList<Restriction2>();
+		ArrayList<RestrictionCustom> restricciones = new ArrayList<RestrictionCustom>();
 
 		Node attributes = basicDomainNode.getFirstChild();
 
@@ -224,7 +224,7 @@ public abstract class DomainGeneratorCustom
 		BasicDomain domain = new BasicDomain(name, basicType);
 
 		for (int i = 0; i < restricciones.size(); ++i) {
-			domain.addRestriction((Restriction2)restricciones.get(i));
+			domain.addRestriction((RestrictionCustom)restricciones.get(i));
 		}
 
 		return domain;
@@ -240,12 +240,12 @@ public abstract class DomainGeneratorCustom
 	 * 
 	 * @returns An ArrayList with all the Restrictions.
 	 */
-	private static ArrayList<Restriction2> processRestrictions(Node restrictionsNode)
+	private static ArrayList<RestrictionCustom> processRestrictions(Node restrictionsNode)
 	{
 		String name = ""; String subclass = "";
 		Integer value = new Integer(0);
 
-		ArrayList<Restriction2> restricciones = new ArrayList<Restriction2>();
+		ArrayList<RestrictionCustom> restricciones = new ArrayList<RestrictionCustom>();
 
 		Node attributes = restrictionsNode.getFirstChild();
 		while (attributes != null) {
@@ -267,25 +267,25 @@ public abstract class DomainGeneratorCustom
 				}
 
 				if (subclass.compareTo("LongitudCampoIgual") == 0) {
-					restricciones.add(new FieldSizeEqualRestriction2(name, value));
+					restricciones.add(new FieldSizeEqualRestrictionCustom(name, value));
 				}
 				else if (subclass.compareTo("LongitudCampoMayor") == 0) {
-					restricciones.add(new FieldSizeGreaterRestriction2(name, value));
+					restricciones.add(new FieldSizeGreaterRestrictionCustom(name, value));
 				}
 				else if (subclass.compareTo("LongitudCampoMenor") == 0) {
-					restricciones.add(new FieldSizeLessRestriction2(name, value));
+					restricciones.add(new FieldSizeLessRestrictionCustom(name, value));
 				}
 				else if (subclass.compareTo("Numerico") == 0) {
-					restricciones.add(new NumericFieldRestriction2(name));
+					restricciones.add(new NumericFieldRestrictionCustom(name));
 				}
 				else if (subclass.compareTo("LongitudDecimales") == 0) {
-					restricciones.add(new DecimalSizeRestriction2(name, value));
+					restricciones.add(new DecimalSizeRestrictionCustom(name, value));
 				}
 				else if (subclass.compareTo("MayorQue") == 0) {
-					restricciones.add(new GreaterThanRestriction2(name, new Float(value.toString())));
+					restricciones.add(new GreaterThanRestrictionCustom(name, new Float(value.toString())));
 				}
 				else if (subclass.compareTo("MenorQue") == 0) {
-					restricciones.add(new LessThanRestriction2(name, new Float(value.toString())));
+					restricciones.add(new LessThanRestrictionCustom(name, new Float(value.toString())));
 				}
 
 			}

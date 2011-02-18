@@ -30,19 +30,15 @@ import es.udc.cartolab.gvsig.users.utils.DBSession;
 
 public class AlphanumericTableExtension extends Extension {
 
-	private HashMap<String, Integer> formHeights;
+	private HashMap<String, Integer> formHeights = new HashMap<String,Integer>();
 
 
 	public void initialize() {
-
-		formHeights = new HashMap<String, Integer>();
-		formHeights.put("Calles", 275);
 
 	}
 
 
 	public void execute(String actionCommand) {
-		//ParserMain.parseXmlFile("/home/jlopez/Escritorio/test2.xml");
 		AlphanumericForm af = new AlphanumericForm(actionCommand);
 		af.open();
 

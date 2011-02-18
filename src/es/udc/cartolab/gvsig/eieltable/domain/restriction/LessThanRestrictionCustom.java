@@ -21,43 +21,57 @@
 package es.udc.cartolab.gvsig.eieltable.domain.restriction;
 
 /**
- * Field Size Less Restriction.
+ * Less Than Restriction.
  * 
  * Restriction which checks whether the passed value
- * is shorter (<) than a given length.
+ * is lower (<) than a given number.
  * 
  */
-public class FieldSizeLessRestriction2 extends Restriction2
+public class LessThanRestrictionCustom extends NumericFieldRestrictionCustom
 {
 	/**
-	 * The maximum length.
+	 * The maximum value.
 	 */
-	private Integer length;
+	private Float myValue;
 
 	/**
-	 * Field Size Less Restriction Constructor.
+	 * Less Than Restriction Constructor.
 	 * 
 	 * Constructor which accepts a name for the Restriction,
-	 * and the maximum length as an Integer.
+	 * and the decimal max value as a Float.
 	 * 
 	 * @param name the name we want for the Restriction.
-	 * @param length the maximum length as an Integer.
+	 * @param value the max value as a Float.
 	 * 
-	 * @return a new FieldSizeLessRestriction.
+	 * @return a new LessThanRestriction.
 	 */
-	public FieldSizeLessRestriction2(String name, Integer length)
+	public LessThanRestrictionCustom(String name, Float value)
 	{
 		super(name);
-		this.length = length;
+		this.myValue = value;
 	}
 
 	@Override
 	public boolean validate(String value) {
-		return (value.length() < this.length.intValue());
+		boolean valido = true;
+		try
+		{
+			Float valorAux = new Float(value);
+			if (valorAux.compareTo(this.myValue) < 0) {
+				valido = true;
+			} else {
+				valido = false;
+			}
+		}
+		catch (NumberFormatException e)
+		{
+			valido = false;
+		}
+		return valido;
 	}
 
 	@Override
 	public String toString() {
-		return new String("Longitud de campo menor que " + this.length.toString());
+		return new String("El valor del campo debe ser menor que " + this.myValue.toString());
 	}
 }

@@ -27,7 +27,7 @@ package es.udc.cartolab.gvsig.eieltable.domain.restriction;
  * is a numeric one or not.
  * 
  */
-public class NumericFieldRestriction2 extends Restriction2
+public class NumericFieldRestrictionCustom extends RestrictionCustom
 {
 	/**
 	 * Numeric Field Restriction Constructor.
@@ -38,7 +38,7 @@ public class NumericFieldRestriction2 extends Restriction2
 	 * 
 	 * @return a new NumericFieldRestriction.
 	 */
-	public NumericFieldRestriction2(String name)
+	public NumericFieldRestrictionCustom(String name)
 	{
 		super(name);
 	}

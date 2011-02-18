@@ -23,9 +23,9 @@ package es.udc.cartolab.gvsig.eieltable.structure.domain;
 
 import java.util.ArrayList;
 
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.DecimalSizeRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.NumericFieldRestriction2;
-import es.udc.cartolab.gvsig.eieltable.domain.restriction.Restriction2;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.DecimalSizeRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.NumericFieldRestrictionCustom;
+import es.udc.cartolab.gvsig.eieltable.domain.restriction.RestrictionCustom;
 
 
 
@@ -43,7 +43,7 @@ public class BasicDomain extends Domain
 	/**
 	 * All the restrictions appliable to this Domain.
 	 */
-	private ArrayList<Restriction2> restrictions;
+	private ArrayList<RestrictionCustom> restrictions;
 
 	/**
 	 * Basic Domain constructor.
@@ -59,13 +59,13 @@ public class BasicDomain extends Domain
 	{
 		super(name, "basico");
 		this.tipoBase = tipoBase;
-		this.restrictions = new ArrayList<Restriction2>();
+		this.restrictions = new ArrayList<RestrictionCustom>();
 		//three tipoBase kinds: string, int, numeric (float?)
 		if (this.tipoBase.equalsIgnoreCase("int") || this.tipoBase.equalsIgnoreCase("numeric")) {
-			restrictions.add(new NumericFieldRestriction2("tipoBase"));
+			restrictions.add(new NumericFieldRestrictionCustom("tipoBase"));
 			if (this.tipoBase.equalsIgnoreCase("int")) {
 				//no decimal count allowed
-				restrictions.add(new DecimalSizeRestriction2("tipoBase", 0));
+				restrictions.add(new DecimalSizeRestrictionCustom("tipoBase", 0));
 			}
 		}
 		this.description = new String(tipoBase);
@@ -89,9 +89,9 @@ public class BasicDomain extends Domain
 	 *
 	 * @param restriction the Restriction we want to add.
 	 * 
-	 * @see Restriction2
+	 * @see RestrictionCustom
 	 */
-	public void addRestriction(Restriction2 restriction)
+	public void addRestriction(RestrictionCustom restriction)
 	{
 		this.restrictions.add(restriction);
 
@@ -105,9 +105,9 @@ public class BasicDomain extends Domain
 	 *
 	 * @return An ArrayList with all the Restrictions added to this Domain.
 	 * 
-	 * @see Restriction2
+	 * @see RestrictionCustom
 	 */
-	public ArrayList<Restriction2> getRestrictions() {
+	public ArrayList<RestrictionCustom> getRestrictions() {
 		return this.restrictions;
 	}
 
