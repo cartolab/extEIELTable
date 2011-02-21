@@ -103,6 +103,7 @@ public abstract class DomainGeneratorCustom
 				} else {
 					System.out.println("El dominio " + domainName + " no ha sido encontrado !!!");
 					System.out.println("Crearemos un domain basico tipo String por defecto");
+					domain = new BasicDomain("String default", "String");
 				}
 			}
 			catch (Exception e) {
