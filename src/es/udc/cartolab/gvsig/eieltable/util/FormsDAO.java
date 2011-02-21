@@ -179,9 +179,22 @@ public class FormsDAO {
 		}
 		while (fieldsIterator.hasNext()) {
 			String oneField = (String)fieldsIterator.next();
-			String oneFieldValue = (String)fields.get(oneField);
-			if (oneFieldValue != null && oneFieldValue.compareTo("") != 0) {
-				updateString = updateString + oneField + " = '" + fields.get(oneField) + "',\n ";
+			String oneFieldValue;
+			if (fields.get(oneField) instanceof Boolean) {
+				if ((Boolean)fields.get(oneField)) {
+					oneFieldValue = "SI";
+				} else {
+					oneFieldValue = "NO";
+				}
+			} else {
+				oneFieldValue = (String)fields.get(oneField);
+			}
+			if (oneFieldValue != null) {
+				if (oneFieldValue.compareTo("") != 0) {
+					updateString = updateString + oneField + " = '" + oneFieldValue + "',\n ";
+				} else {
+					updateString = updateString + oneField + " = null,\n ";
+				}
 			} else {
 				updateString = updateString + oneField + " = null,\n ";
 			}
@@ -257,9 +270,22 @@ public class FormsDAO {
 				int i=1;
 				while (fieldsIterator.hasNext()) {
 					String oneField = (String)fieldsIterator.next();
-					String value = ((String)fields.get(oneField)).trim();
-					if (!value.equals("")) {
-						statement.setObject(i, value);
+					String oneFieldValue;
+					if (fields.get(oneField) instanceof Boolean) {
+						if ((Boolean)fields.get(oneField)) {
+							oneFieldValue = "SI";
+						} else {
+							oneFieldValue = "NO";
+						}
+					} else {
+						oneFieldValue = (String)fields.get(oneField);
+					}
+					if (oneFieldValue != null) {
+						if (oneFieldValue.compareTo("") != 0) {
+							statement.setObject(i, oneFieldValue);
+						} else {
+							statement.setObject(i, null);
+						}
 					} else {
 						statement.setObject(i, null);
 					}
@@ -308,6 +334,7 @@ public class FormsDAO {
 
 				statement = connection.createStatement();
 				int updatedRows = statement.executeUpdate(deleteString);
+				connection.commit();
 
 				System.out.println("SENTENCIA DELETE EJECUTADA >>>>>>>>> \n" + deleteString);
 
@@ -365,6 +392,7 @@ public class FormsDAO {
 				statement = connection.createStatement();
 
 				resultSet = statement.executeQuery(queryString);
+				connection.commit();
 
 
 				while (resultSet.next()) {
