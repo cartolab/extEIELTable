@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -212,7 +213,8 @@ public class TableFrame extends JPanel {
 
 			for (i=0; i<fields.size(); i++) {
 				if (fields.get(i).getDomain().getName().equals("Autonumerico")) {
-					if ((((MyTableModel) table.getModel()).getInnerValueAt(n, i) == null) || ("".equals(((MyTableModel) table.getModel()).getInnerValueAt(n, i)))) {
+					if ((((MyTableModel) table.getModel()).getInnerValueAt(n, i) == null) ||
+							("".equals(((MyTableModel) table.getModel()).getInnerValueAt(n, i)))) {
 						continue;
 					} else {
 						keys.put(fields.get(i).getName(), ((MyTableModel) table.getModel()).getInnerValueAt(n, i));
@@ -232,7 +234,6 @@ public class TableFrame extends JPanel {
 
 	public HashMap<Integer,HashMap<String,Object>> getNewRows() {
 		HashSet<Integer> aux = modified;
-		//modified.clear();
 		Iterator<Integer> iter = aux.iterator();
 
 		HashMap<Integer,HashMap<String,Object>> results = new HashMap<Integer,HashMap<String,Object>>();
@@ -244,11 +245,12 @@ public class TableFrame extends JPanel {
 
 			for (i=0; i<fields.size(); i++) {
 				if (fields.get(i).getDomain().getName().equals("Autonumerico")) {
-					if (!((table.getModel().getValueAt(n, i) == null) || ("".equals(table.getModel().getValueAt(n, i))))) {
+					if (!((((MyTableModel) table.getModel()).getInnerValueAt(n, i) == null) ||
+							("".equals(((MyTableModel) table.getModel()).getInnerValueAt(n, i))))) {
 						newRow = false;
 					}
 				} else {
-					values.put(fields.get(i).getName(), this.table.getModel().getValueAt(n, i));
+					values.put(fields.get(i).getName(), ((MyTableModel) table.getModel()).getInnerValueAt(n, i));
 				}
 			}
 
@@ -288,10 +290,18 @@ public class TableFrame extends JPanel {
 	public void deleteSelectedRows() {
 
 		int [] rows = this.table.getSelectedRows();
+		ArrayList<Integer> rowsC = new ArrayList<Integer>();
+		Arrays.sort(rows);
 		int rowC;
 
-		for (int i = rows.length-1; i >= 0; i--) {
-			rowC = table.convertRowIndexToModel(rows[i]);
+		for (int i = 0; i < rows.length; i++) {
+			rowsC.add(table.convertRowIndexToModel(rows[i]));
+		}
+
+		Collections.sort(rowsC);
+
+		for (int i = rowsC.size()-1; i>=0; i--) {
+			rowC = rowsC.get(i);
 			HashMap<String,Object> keys = new HashMap<String,Object>();
 			HashMap<Integer,Object> keysAux = new HashMap<Integer,Object>();
 
@@ -327,10 +337,11 @@ public class TableFrame extends JPanel {
 						aux.add(value);
 					}
 				}
-				this.modified = aux;
+				this.modified.clear();
+				this.modified.addAll(aux);
 			}
 
-			((MyTableModel) this.table.getModel()).deleteRow(rowC, rows[i]);
+			((MyTableModel) this.table.getModel()).deleteRow(rowC, table.convertRowIndexToView(rowC));
 		}
 	}
 
@@ -346,7 +357,7 @@ public class TableFrame extends JPanel {
 				String field = iter2.next();
 				for(int i = 0; i < this.fields.size(); i++) {
 					if (this.fields.get(i).getName().equals(field)) {
-						((MyTableModel) this.table.getModel()).setValueAt(rowValues.get(field), key, i);
+						((MyTableModel) this.table.getModel()).setInnerValueAt(rowValues.get(field), key, i);
 					}
 				}
 			}
@@ -503,6 +514,24 @@ public class TableFrame extends JPanel {
 				System.out.println("New value of data:");
 				printDebugData();
 			}
+		}
+
+		public void setInnerValueAt(Object value, int row, int col) {
+
+			if (DEBUG) {
+				System.out.println("Setting inner value at " + row + "," + col
+						+ " to " + value
+						+ " (an instance of "
+						+ value.getClass() + ")");
+			}
+
+			if ((fields.get(col).getDomain().getType().equals("basico")) && (fields.get(col).getDomain().getName().startsWith("numerico")) && !(fields.get(col).getDomain().toString().startsWith("int"))) {
+				data.get(row)[col] = value.toString();
+			} else {
+				data.get(row)[col] = value;
+			}
+
+			fireTableCellUpdated(row, col);
 		}
 
 		private void printDebugData() {
