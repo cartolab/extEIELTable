@@ -154,10 +154,10 @@ public class TableFrame extends JPanel {
 			if (DEBUG) {
 				System.out.println("Initializing width of column "
 						+ i + ". "
-						+ "maxWidth = " + maxWidth);
+						+ "maxWidth = " + (maxWidth + 50));
 			}
 
-			column.setPreferredWidth(maxWidth*3);
+			column.setPreferredWidth(maxWidth+50);
 		}
 	}
 
@@ -234,6 +234,7 @@ public class TableFrame extends JPanel {
 
 	public HashMap<Integer,HashMap<String,Object>> getNewRows() {
 		HashSet<Integer> aux = modified;
+
 		Iterator<Integer> iter = aux.iterator();
 
 		HashMap<Integer,HashMap<String,Object>> results = new HashMap<Integer,HashMap<String,Object>>();
