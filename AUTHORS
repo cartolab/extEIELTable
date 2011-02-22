@@ -1,4 +1,11 @@
-extEIELForms was written and maintened by this team:
+extEIELTable was written and maintained by this team:
+
+DEVELOPERS:
+	- Jorge López Fernández <jlopez (at) cartolab (dot) es>
+
+CARTOLAB'S HEAD OFFICER: Alberto Varela García
+
+extEIELTable is based on the extension extEIELForms, which was written and maintained by this team:
 
 DEVELOPERS:
 	- Javier Estévez Valiñas <jestevez (at) cartolab (dot) es>
@@ -6,4 +13,4 @@ DEVELOPERS:
 CARTOLAB'S HEAD OFFICER: Alberto Varela García
 
 extEIELForms is based on the forms application of GisEIEL <http://giseiel.forge.osor.eu/>
-devoloped by Laboratorio de Bases de Datos (Universidade da Coruña)
+developed by Laboratorio de Bases de Datos (Universidade da Coruña)

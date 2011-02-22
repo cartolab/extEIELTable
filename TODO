@@ -1,0 +1,5 @@
+Mejoras potenciales:
+
+- Eliminar toda dependencia en las tablas sobre el campo gid como único identificador posible (el identificador debería ser detectado en base a la propia definición de la columna, pero presenta problemas al poder ser múltiple en tal caso).
+- Eliminar todo el código perteneciente al parser anterior y obtener todos los datos de BD en base al nuevo (actualmente se emplea una función del código del anterior que nos los devuelve directamente, pero por ello se realizan dos parseos, el primero para obtener los datos y el segundo para crear la tabla).
+- Cuando se crea un registro nuevo, que éste sea colocado en la última posición de la tabla ordenada ascendentemente según el/los identificador/es (actualmente se coloca ahí en sentido descendiente, ya que el valor nulo inicial de todos los campos es inferior a cualquier otro y la tabla lo ordena por defecto al pintar la fila nueva).
