@@ -7,7 +7,7 @@
   <property name="build" location="bin"/>
   <property name="dist"  location="dist"/>
   <property name="mainplugin" value="com.iver.cit.gvsig"/>
-  <property name="plugin" value="es.udc.cartolab.gvsig.eielforms"/>
+  <property name="plugin" value="es.udc.cartolab.gvsig.eieltables"/>
   <property name="andami" location="../_fwAndami" />
 	<property name="extensionsDir" location="../_fwAndami/gvSIG/extensiones"/>
 	<property name="lib-dir" location="${extensionsDir}/${mainplugin}/lib"/>

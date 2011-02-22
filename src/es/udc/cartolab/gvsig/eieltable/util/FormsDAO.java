@@ -363,7 +363,6 @@ public class FormsDAO {
 		Statement statement = null;
 		ResultSet resultSet = null;
 
-		ArrayList fieldsCollection = new ArrayList();
 		String condition = getWhereCondition(key);
 		if (condition.equals("")) {
 			condition = "WHERE ";
