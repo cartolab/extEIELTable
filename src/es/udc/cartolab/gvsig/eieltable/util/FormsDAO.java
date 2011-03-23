@@ -187,7 +187,7 @@ public class FormsDAO {
 					oneFieldValue = "NO";
 				}
 			} else {
-				oneFieldValue = (String)fields.get(oneField);
+				oneFieldValue = fields.get(oneField).toString();
 			}
 			if (oneFieldValue != null) {
 				if (oneFieldValue.compareTo("") != 0) {
