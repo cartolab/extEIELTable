@@ -12,32 +12,32 @@
 	<resourceBundle name="text"/>
 	<extensions>
 		<extension class-name="es.udc.cartolab.gvsig.eieltable.AlphanumericTableExtension" description="form" active="true">
-			<menu text="EIEL/Tablas/Infraestructuras Transportes/Carreteras"
+			<menu text="EIEL/Tablas/Infraestructuras transportes/Carreteras"
 				action-command="Carreteras"
 				position="1001"/>
-			<menu text="EIEL/Tablas/Infraestructuras Transportes/Calles"
+			<menu text="EIEL/Tablas/Infraestructuras transportes/Calles"
 				action-command="Calles"
 				position="1002"/>
 
-			<menu text="EIEL/Tablas/Servicios Urbanos/Alumbrado"
+			<menu text="EIEL/Tablas/Servicios urbanos/Alumbrado"
 				action-command="Alumbrado"
 				position="1101"/>
-			<menu text="EIEL/Tablas/Servicios Urbanos/Municipio Recogida Residuos"
+			<menu text="EIEL/Tablas/Servicios urbanos/Municipio recogida residuos"
 				action-command="Municipio Recogida Residuos"
 				position="1102"/>
-			<menu text="EIEL/Tablas/Servicios Urbanos/Municipio Alumbrado"
+			<menu text="EIEL/Tablas/Servicios urbanos/Municipio alumbrado"
 				action-command="Municipio Alumbrado"
 				position="1103"/>
-			<menu text="EIEL/Tablas/Servicios Urbanos/Núcleo Recogida de basura"
+			<menu text="EIEL/Tablas/Servicios urbanos/Núcleo recogida de basura"
 				action-command="Nucleo_recogida_de_basura"
 				position="1104"/>
-			<menu text="EIEL/Tablas/Servicios Urbanos/Núcleo Otros datos"
+			<menu text="EIEL/Tablas/Servicios urbanos/Núcleo otros datos"
 				action-command="Nucleo_otros_datos"
 				position="1105"/>
-			<menu text="EIEL/Tablas/Servicios Urbanos/Otros servicios municipales"
+			<menu text="EIEL/Tablas/Servicios urbanos/Otros servicios municipales"
 				action-command="Otros_Servicios_Municipales_alfanumericos"
 				position="1106"/>
-			<menu text="EIEL/Tablas/Servicios Urbanos/Vertederos"
+			<menu text="EIEL/Tablas/Servicios urbanos/Vertederos"
 				action-command="Vertederos_alfanumericos"
 				position="1107" />
 
@@ -53,16 +53,16 @@
 				action-command="Depositos_alfanumericos"
 				position="1203"/>
 
-			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Municipio Abastecimiento"
+			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Municipio abastecimiento"
 				action-command="Municipio Abastecimiento"
 				position="1204"/>
-			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Núcleo Abastecimiento"
+			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Núcleo abastecimiento"
 				action-command="Nucleo_abastecimiento"
 				position="1205"/>
-			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Núcleo Abastecimiento 2"
+			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Núcleo abastecimiento 2"
 				action-command="Nucleo_abastecimiento_2"
 				position="1206"/>
-			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Núcleo Abastecimiento Autónomo"
+			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Núcleo abastecimiento autónomo"
 				action-command="Nucleo_abastecimiento_autonomo"
 				position="1207"/>
 			<menu text="EIEL/Tablas/Infraestructura hidráulica/Abastecimiento/Potabilizadoras"
@@ -82,30 +82,30 @@
 			<menu text="EIEL/Tablas/Infraestructura hidráulica/Saneamiento/Emisarios encuestados"
 				action-command="Emisarios_encuestados"
 				position="1304" />
-			<menu text="EIEL/Tablas/Infraestructura hidráulica/Saneamiento/Municipio Saneamiento"
+			<menu text="EIEL/Tablas/Infraestructura hidráulica/Saneamiento/Municipio saneamiento"
 				action-command="Municipio Saneamiento"
 				position="1305"/>
-			<menu text="EIEL/Tablas/Infraestructura hidráulica/Saneamiento/Núcleo Saneamiento y depuración"
+			<menu text="EIEL/Tablas/Infraestructura hidráulica/Saneamiento/Núcleo saneamiento y depuración"
 				action-command="Nucleo_saneamiento_y_depuracion"
 				position="1306"/>
-			<menu text="EIEL/Tablas/Infraestructura hidráulica/Saneamiento/Núcleo Saneamiento Autónomo"
+			<menu text="EIEL/Tablas/Infraestructura hidráulica/Saneamiento/Núcleo saneamiento autónomo"
 				action-command="Saneamiento_Autonomo_alfanumericos"
 				position="1307"/>
 
 
-			<menu text="EIEL/Tablas/Información Urbanística/Entidad Singular"
+			<menu text="EIEL/Tablas/Información urbanística/Entidad singular"
 				action-command="Entidad singular"
 				position="1401" />
-			<menu text="EIEL/Tablas/Información Urbanística/Municipio Datos Generales"
+			<menu text="EIEL/Tablas/Información urbanística/Municipio datos generales"
 				action-command="Municipio Datos Generales"
 				position="1402"/>
-			<menu text="EIEL/Tablas/Información Urbanística/Núcleos Abandonados"
+			<menu text="EIEL/Tablas/Información urbanística/Núcleos abandonados"
 				action-command="Núcleos abandonados"
 				position="1403"/>
-			<menu text="EIEL/Tablas/Información Urbanística/Núcleo Datos Generales"
+			<menu text="EIEL/Tablas/Información urbanística/Núcleo datos generales"
 				action-command="Nucleo encuestado 1"
 				position="1404"/>
-			<menu text="EIEL/Tablas/Información Urbanística/Planeamiento Urbanístico"
+			<menu text="EIEL/Tablas/Información urbanística/Planeamiento urbanístico"
 				action-command="Plan_Urbanistico_alfanumericos"
 				position="1405"/>
 
