@@ -296,7 +296,7 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 
 	private void enableEdit(boolean enable) {
 		if (saveButton!=null) {
-			saveButton.setEnabled(enable);
+			saveButton.setEnabled(true);
 		}
 	}
 

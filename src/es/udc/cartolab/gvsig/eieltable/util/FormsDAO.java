@@ -101,10 +101,14 @@ public class FormsDAO {
 		Statement statement = null;
 		String queryString = "SELECT ";
 		ArrayList<Object[]> result = new ArrayList<Object[]>();
+		int i;
 
-		for (int i = 0; i < fields.size(); ++i) {
+		for (i = 0; i < fields.size(); ++i) {
 			queryString = queryString + fields.get(i) + ", ";
 		}
+
+		Object[][] arrayResult = new Object[1][i];
+
 		queryString = queryString.substring(0, queryString.length() - 2) + " ";
 
 		if (!schemaName.equals("")) {
@@ -123,8 +127,8 @@ public class FormsDAO {
 
 				while (resultSet.next()) {
 					ArrayList<Object> row = new ArrayList<Object>();
-					for (int i = 0; i<fields.size() ; ++i) {
-						row.add(resultSet.getString(fields.get(i)));
+					for (int j = 0; j<fields.size() ; ++j) {
+						row.add(resultSet.getString(fields.get(j)));
 					}
 					result.add(row.toArray());
 				}
@@ -132,7 +136,9 @@ public class FormsDAO {
 				throw new FormException("La sesion no se ha iniciado");
 			}
 
-			return (Object[][]) result.toArray(new Object[0][0]);
+			if (result.size() > 0)
+				arrayResult = result.toArray(new Object[0][0]);
+				return arrayResult;
 		} catch (SQLException e) {
 			try {
 				DBSession.reconnect();
