@@ -274,9 +274,11 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 		String fieldName = fc.getName();
 		String fieldValue = getFirstKey(fieldName);
 		boolean edit = fieldValue != null;
-		enableEdit(edit);
 		if (edit) {
 			key.put(fieldName, fieldValue);
+		} else {
+			TableFrame table = (TableFrame) this.getComponent(0);
+			table.voidTableDirectly();
 		}
 
 		return edit;
@@ -296,7 +298,7 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 
 	private void enableEdit(boolean enable) {
 		if (saveButton!=null) {
-			saveButton.setEnabled(true);
+			saveButton.setEnabled(enable);
 		}
 	}
 

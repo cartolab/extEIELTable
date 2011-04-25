@@ -288,6 +288,30 @@ public class TableFrame extends JPanel {
 
 	}
 
+	/* Please bear in mind that this method voids the table
+	 * without noting down the deleted rows. It's intended
+	 * for deleting rows which make no sense on DB.  */
+	public void voidTableDirectly() {
+		this.table.selectAll();
+
+		int [] rows = this.table.getSelectedRows();
+		ArrayList<Integer> rowsC = new ArrayList<Integer>();
+		Arrays.sort(rows);
+		int rowC;
+
+		for (int i = 0; i < rows.length; i++) {
+			rowsC.add(table.convertRowIndexToModel(rows[i]));
+		}
+
+		Collections.sort(rowsC);
+
+		for (int i = rowsC.size()-1; i>=0; i--) {
+			rowC = rowsC.get(i);
+
+			((MyTableModel) this.table.getModel()).deleteRow(rowC, table.convertRowIndexToView(rowC));
+		}
+	}
+
 	public void deleteSelectedRows() {
 
 		int [] rows = this.table.getSelectedRows();
