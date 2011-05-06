@@ -18,16 +18,19 @@
 			<menu text="EIEL/Tablas/Infraestructuras transportes/Calles"
 				action-command="Calles"
 				position="1002"/>
-
+		<!--
 			<menu text="EIEL/Tablas/Servicios urbanos/Alumbrado"
 				action-command="Alumbrado"
 				position="1101"/>
+		-->
 			<menu text="EIEL/Tablas/Servicios urbanos/Municipio recogida residuos"
 				action-command="Municipio Recogida Residuos"
 				position="1102"/>
-			<menu text="EIEL/Tablas/Servicios urbanos/Municipio alumbrado"
+
+				<menu text="EIEL/Tablas/Servicios urbanos/Municipio alumbrado"
 				action-command="Municipio Alumbrado"
 				position="1103"/>
+
 			<menu text="EIEL/Tablas/Servicios urbanos/Núcleo recogida de basura"
 				action-command="Nucleo_recogida_de_basura"
 				position="1104"/>
