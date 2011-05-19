@@ -29,6 +29,7 @@ import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -327,6 +328,15 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 
 	}
 
+	private boolean hasUnsavedChanges() {
+
+		TableFrame table = (TableFrame) this.getComponent(0);
+
+		return ((table.getModifiedRows().size() +
+			 table.getNewRows().size() +
+			 table.getDeletedRows().size()) > 0);
+	}
+
 	private void createNewRow() {
 
 		TableFrame table = (TableFrame) this.getComponent(0);
@@ -341,6 +351,31 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 
 		table.deleteSelectedRows();
 
+	}
+
+	protected void showWarning() {
+		boolean changed = hasUnsavedChanges();
+		if (changed) {
+		    Object[] options = {
+			    PluginServices.getText(this, "saveButtonTooltip"),
+			    PluginServices.getText(this, "ignoreButton"),
+			    PluginServices.getText(this, "cancelButton") };
+		    int response = JOptionPane.showOptionDialog(this,
+			    PluginServices.getText(this, "unsavedDataMessage"),
+			    PluginServices.getText(this, "unsavedDataTitle"),
+			    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+			    null, // do not use a custom Icon
+			    options, // the titles of buttons
+			    options[1]); // default button title
+		    switch (response){
+			    case 0:
+				    saveModifiedRows();
+			    case 1:
+				    close();
+				    break;
+			    case 2:
+		    }
+		} else close();
 	}
 
 
@@ -360,7 +395,7 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 		}
 
 		if (arg0.getSource() == closeButton) {
-			close();
+			showWarning();
 		}
 	}
 }
