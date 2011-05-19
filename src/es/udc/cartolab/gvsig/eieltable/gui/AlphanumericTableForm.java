@@ -180,16 +180,16 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 	protected JPanel getButtonsPanel() {
 		if (southPanel == null) {
 			southPanel = new JPanel();
-			newButton = new JButton("Nuevo registro");
+			newButton = new JButton(PluginServices.getText(this, "eielTable_newRegisterButton"));
 			newButton.addActionListener(this);
 			southPanel.add(newButton);
-			delButton = new JButton("Borrar registros");
+			delButton = new JButton(PluginServices.getText(this, "eielTable_deleteRegisterButton"));
 			delButton.addActionListener(this);
 			southPanel.add(delButton);
-			saveButton = new JButton("Guardar");
+			saveButton = new JButton(PluginServices.getText(this, "eielTable_saveButton"));
 			saveButton.addActionListener(this);
 			southPanel.add(saveButton);
-			closeButton = new JButton("Cerrar");
+			closeButton = new JButton(PluginServices.getText(this, "eielTable_closeButton"));
 			closeButton.addActionListener(this);
 			southPanel.add(closeButton);
 			southPanel.setMinimumSize(southPanel.getPreferredSize());
@@ -357,12 +357,12 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 		boolean changed = hasUnsavedChanges();
 		if (changed) {
 		    Object[] options = {
-			    PluginServices.getText(this, "saveButtonTooltip"),
-			    PluginServices.getText(this, "ignoreButton"),
-			    PluginServices.getText(this, "cancelButton") };
+			    PluginServices.getText(this, "eielTable_saveButtonTooltip"),
+			    PluginServices.getText(this, "eielTable_ignoreButton"),
+			    PluginServices.getText(this, "eielTable_cancelButton") };
 		    int response = JOptionPane.showOptionDialog(this,
-			    PluginServices.getText(this, "unsavedDataMessage"),
-			    PluginServices.getText(this, "unsavedDataTitle"),
+			    PluginServices.getText(this, "eielTable_unsavedDataMessage"),
+			    PluginServices.getText(this, "eielTable_unsavedDataTitle"),
 			    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 			    null, // do not use a custom Icon
 			    options, // the titles of buttons
