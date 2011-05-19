@@ -75,7 +75,7 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 
 	public WindowInfo getWindowInfo() {
 		if (viewInfo == null){
-			viewInfo = new WindowInfo(WindowInfo.MODELESSDIALOG | WindowInfo.RESIZABLE | WindowInfo.PALETTE);
+			viewInfo = new WindowInfo(WindowInfo.MODELESSDIALOG | WindowInfo.RESIZABLE | WindowInfo.PALETTE | WindowInfo.NOTCLOSABLE);
 			viewInfo.setTitle("Alphanumeric form");
 			Dimension dim = getPreferredSize();
 			MDIFrame a = (MDIFrame) PluginServices.getMainFrame();
@@ -309,6 +309,8 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 	}
 
 	public void close() {
+		viewInfo.setNotClosable(true);
+		PluginServices.getMDIManager().changeWindowInfo(this, viewInfo);
 		PluginServices.getMDIManager().closeWindow(this);
 	}
 
