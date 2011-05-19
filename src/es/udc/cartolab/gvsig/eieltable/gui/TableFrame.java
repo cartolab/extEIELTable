@@ -77,11 +77,13 @@ public class TableFrame extends JPanel {
 			if (fields.get(i).getDomain().getName().equals("disyuntiva")) {
 				for (j=0; j<data.length; j++) {
 					if (data[j][i] != null) {
-						if (((String)data[j][i]).equals("NO")) {
-							data[j][i] = false;
-						} else {
-							data[j][i] = true;
-						}
+						data[j][i] = ((String)data[j][i]).equals("SI");
+					} else data[j][i] = false;
+				}
+			} else {
+				for (j=0; j<data.length; j++) {
+					if (data[j][i] == null) {
+						data[j][i] = "";
 					}
 				}
 			}
@@ -188,11 +190,7 @@ public class TableFrame extends JPanel {
 			if (fields.get(i).getDomain().getName().equals("disyuntiva")) {
 				for (j=0; j<data.length; j++) {
 					if (data[j][i] != null) {
-						if (((String)data[j][i]).equals("SI")) {
-							data[j][i] = true;
-						} else {
-							data[j][i] = false;
-						}
+						data[j][i] = ((String)data[j][i]).equals("SI");
 					}
 				}
 			}
@@ -397,7 +395,7 @@ public class TableFrame extends JPanel {
 	class MyTableModel extends AbstractTableModel {
 		private ArrayList<SingleField> fields;
 		private List<Object[]> data;
-		public Object[] longValues;
+		private Object[] longValues;
 
 		public MyTableModel(ArrayList<SingleField> fields) {
 			this.fields = fields;
