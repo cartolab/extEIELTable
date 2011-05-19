@@ -56,7 +56,7 @@ import es.udc.cartolab.gvsig.eieltable.formgenerator.FormGenerator;
 import es.udc.cartolab.gvsig.eieltable.forms.FormController;
 import es.udc.cartolab.gvsig.eieltable.util.FormsDAO;
 
-public class AlphanumericForm extends JPanel implements IWindow, ActionListener {
+public class AlphanumericTableForm extends JPanel implements IWindow, ActionListener {
 
 	protected String formName;
 	private WindowInfo viewInfo;
@@ -66,7 +66,7 @@ public class AlphanumericForm extends JPanel implements IWindow, ActionListener 
 	private JButton saveButton, newButton, closeButton, delButton;
 
 
-	public AlphanumericForm(String formName) {
+	public AlphanumericTableForm(String formName) {
 		this.formName = formName;
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setFocusCycleRoot(true);

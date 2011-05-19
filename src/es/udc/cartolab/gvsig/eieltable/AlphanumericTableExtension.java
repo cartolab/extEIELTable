@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 import com.iver.andami.plugins.Extension;
 
-import es.udc.cartolab.gvsig.eieltable.gui.AlphanumericForm;
+import es.udc.cartolab.gvsig.eieltable.gui.AlphanumericTableForm;
 import es.udc.cartolab.gvsig.eielutils.constants.Constants;
 import es.udc.cartolab.gvsig.users.utils.DBSession;
 
@@ -39,7 +39,7 @@ public class AlphanumericTableExtension extends Extension {
 
 
 	public void execute(String actionCommand) {
-		AlphanumericForm af = new AlphanumericForm(actionCommand);
+		AlphanumericTableForm af = new AlphanumericTableForm(actionCommand);
 		af.open();
 
 		Integer height = formHeights.get(actionCommand);

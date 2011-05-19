@@ -42,7 +42,7 @@ import es.udc.cartolab.gvsig.eieltable.util.FormsDAO;
 import es.udc.cartolab.gvsig.eielutils.misc.EIELValues;
 import es.udc.cartolab.gvsig.users.utils.DBSession;
 
-public class NucleosRelationWindow extends AlphanumericForm {
+public class NucleosRelationWindow extends AlphanumericTableForm {
 
 	private String title, dbtable;
 	private WindowInfo windowInfo;
