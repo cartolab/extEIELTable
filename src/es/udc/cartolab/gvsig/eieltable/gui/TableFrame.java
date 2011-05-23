@@ -466,10 +466,15 @@ public class TableFrame extends JPanel {
 
 		@Override
 		public Object getValueAt(int row, int col) {
-			if ((fields.get(col).getDomain().getType().equals("basico")) && (fields.get(col).getDomain().getName().startsWith("numerico")) && !(fields.get(col).getDomain().toString().startsWith("int"))) {
-				return Double.valueOf((String)data.get(row)[col]);
+			if ((fields.get(col).getDomain().getType().equals("basico")) && (fields.get(col).getDomain().getName().toLowerCase().equals("autonumerico"))) {
+				if ((data.get(row)[col] != null) && (((String)data.get(row)[col]).length() > 0))
+					return Integer.valueOf((String)data.get(row)[col]);
 			}
-			if ((fields.get(col).getDomain().getType().equals("usuario")) && !(fields.get(col).getDomain().toString().startsWith("disyuntiva"))) {
+			if ((fields.get(col).getDomain().getType().equals("basico")) && (fields.get(col).getDomain().getName().toLowerCase().equals("numerico"))) {
+				if ((data.get(row)[col] != null) && (((String)data.get(row)[col]).length() > 0))
+					return Double.valueOf((String)data.get(row)[col]);
+			}
+			if ((fields.get(col).getDomain().getType().equals("usuario")) && !(fields.get(col).getDomain().getName().toLowerCase().equals("disyuntiva"))) {
 				return ((UserDomain) fields.get(col).getDomain()).resolve((String) data.get(row)[col]);
 			}
 			return data.get(row)[col];
@@ -483,7 +488,7 @@ public class TableFrame extends JPanel {
 		 */
 		@Override
 		public Class getColumnClass(int c) {
-			if ((fields.get(c).getDomain().getType().equals("basico")) && ((fields.get(c).getDomain().toString().startsWith("int")) || (fields.get(c).getDomain().toString().startsWith("numerico")))) {
+			if ((fields.get(c).getDomain().getType().equals("basico")) && ((fields.get(c).getDomain().getName().startsWith("int")) || (fields.get(c).getDomain().getName().toLowerCase().startsWith("autonumerico")) || (fields.get(c).getDomain().getName().toLowerCase().startsWith("numerico")))) {
 				return Integer.class;
 			}
 			if ((fields.get(c).getDomain().getType().equals("basico")) && (fields.get(c).getDomain().getName().startsWith("numerico"))) {
