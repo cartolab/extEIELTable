@@ -392,6 +392,10 @@ public class TableFrame extends JPanel {
 		deleted.clear();
 	}
 
+	public void clearPendingDeletions() {
+		deleted.clear();
+	}
+
 	class MyTableModel extends AbstractTableModel {
 		private ArrayList<SingleField> fields;
 		private List<Object[]> data;

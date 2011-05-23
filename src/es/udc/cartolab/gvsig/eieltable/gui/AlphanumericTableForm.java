@@ -320,13 +320,24 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 
 		ArrayList<ArrayList<HashMap<String,Object>>> modified = table.getModifiedRows();
 		HashMap<Integer,HashMap<String,Object>> created = table.getNewRows();
-		ArrayList<HashMap<String,Object>> deleted = table.getDeletedRows();
 
-		HashMap<Integer,HashMap<String,Object>> newValues = form.updateRows(modified, created, deleted);
+		HashMap<Integer,HashMap<String,Object>> newValues = form.updateNewModifiedRows(modified, created);
 
 		table.setSavedValues(newValues);
 
 		table.clearPendingChanges();
+
+	}
+
+	private void saveDeletedRows() {
+
+		TableFrame table = (TableFrame) this.getComponent(0);
+
+		ArrayList<HashMap<String,Object>> deleted = table.getDeletedRows();
+
+		form.updateDeletedRows(deleted);
+
+		table.clearPendingDeletions();
 
 	}
 
@@ -335,8 +346,7 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 		TableFrame table = (TableFrame) this.getComponent(0);
 
 		return ((table.getModifiedRows().size() +
-			 table.getNewRows().size() +
-			 table.getDeletedRows().size()) > 0);
+			 table.getNewRows().size()) > 0);
 	}
 
 	private void createNewRow() {
@@ -349,33 +359,48 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 
 	private void deleteRows() {
 
-		TableFrame table = (TableFrame) this.getComponent(0);
-
-		table.deleteSelectedRows();
+		Object[] options = {
+		    PluginServices.getText(this, "eielTable_deleteButtonTooltip"),
+		    PluginServices.getText(this, "eielTable_cancelButton") };
+		int response = JOptionPane.showOptionDialog(this,
+		    PluginServices.getText(this, "eielTable_deleteRowsMessage"),
+		    PluginServices.getText(this, "eielTable_deleteRowsTitle"),
+		    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+		    null, // do not use a custom Icon
+		    options, // the titles of buttons
+		    options[1]); // default button title
+		switch (response){
+			case 0:
+				TableFrame table = (TableFrame) this.getComponent(0);
+				table.deleteSelectedRows();
+			case 1:
+				break;
+	    }
 
 	}
 
 	protected void showWarning() {
 		boolean changed = hasUnsavedChanges();
 		if (changed) {
-		    Object[] options = {
+			Object[] options = {
 			    PluginServices.getText(this, "eielTable_saveButtonTooltip"),
 			    PluginServices.getText(this, "eielTable_ignoreButton"),
 			    PluginServices.getText(this, "eielTable_cancelButton") };
-		    int response = JOptionPane.showOptionDialog(this,
+			int response = JOptionPane.showOptionDialog(this,
 			    PluginServices.getText(this, "eielTable_unsavedDataMessage"),
 			    PluginServices.getText(this, "eielTable_unsavedDataTitle"),
 			    JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 			    null, // do not use a custom Icon
 			    options, // the titles of buttons
 			    options[1]); // default button title
-		    switch (response){
-			    case 0:
-				    saveModifiedRows();
-			    case 1:
-				    close();
-				    break;
-			    case 2:
+			switch (response){
+				case 0:
+					saveModifiedRows();
+				case 1:
+					close();
+					break;
+				case 2:
+
 		    }
 		} else close();
 	}
@@ -393,6 +418,7 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 
 		if (arg0.getSource() == delButton) {
 			this.deleteRows();
+			this.saveDeletedRows();
 			this.repaint();
 		}
 

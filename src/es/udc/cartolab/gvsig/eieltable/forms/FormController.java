@@ -727,19 +727,10 @@ public class FormController extends Subject
 			try {
 				values = newRows.get(key);
 				fdao.insertEntity(values, dataBase, table);
-
-				/*
-				 * TODO We should try to create a more generic method,
-				 * at least with the serial field name obtained through
-				 * a config file.
-				 * A better approach could obtain the serial field name
-				 * from the DB itself.
-				 */
 				newId = fdao.getHighestValue(new HashMap(), dataBase, table, "gid");
 				values.put("gid", newId);
 				newValues.put(key, values);
 			} catch (FormException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -750,12 +741,68 @@ public class FormController extends Subject
 			try {
 				fdao.deleteEntity(iter3.next(), dataBase, table);
 			} catch (FormException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 
 		return newValues;
+
+	}
+
+	public HashMap<Integer, HashMap<String,Object>> updateNewModifiedRows(ArrayList<ArrayList<HashMap<String,Object>>> modRows, HashMap<Integer, HashMap<String,Object>> newRows) {
+
+		HashMap<Integer,HashMap<String,Object>> newValues = new HashMap<Integer,HashMap<String,Object>>();
+		ArrayList<HashMap<String,Object>> row;
+		FormsDAO fdao = new FormsDAO();
+		Iterator<ArrayList<HashMap<String,Object>>> iter = modRows.iterator();
+
+		while (iter.hasNext()) {
+			row = iter.next();
+			try {
+				if (row.get(0).size() > 0) {
+					fdao.updateEntity(row.get(0), dataBase, table, row.get(1));
+				}
+			} catch (FormException e) {
+				e.printStackTrace();
+			}
+		}
+
+		Set<Integer> keys = newRows.keySet();
+		Iterator<Integer> iter2 = keys.iterator();
+		HashMap<String,Object> values = new HashMap<String,Object>();
+		int key;
+		String newId;
+
+		while (iter2.hasNext()) {
+			key = iter2.next();
+			try {
+				values = newRows.get(key);
+				fdao.insertEntity(values, dataBase, table);
+				newId = fdao.getHighestValue(new HashMap(), dataBase, table, "gid");
+				values.put("gid", newId);
+				newValues.put(key, values);
+			} catch (FormException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return newValues;
+
+	}
+
+	public void updateDeletedRows(ArrayList<HashMap<String,Object>> delRows) {
+
+		FormsDAO fdao = new FormsDAO();
+		Iterator<HashMap<String,Object>> iter = delRows.iterator();
+
+		while (iter.hasNext()) {
+			try {
+				fdao.deleteEntity(iter.next(), dataBase, table);
+			} catch (FormException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
