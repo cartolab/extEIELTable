@@ -200,8 +200,7 @@ public class AlphanumericTableForm extends JPanel implements IWindow, ActionList
 
 
 	public Object getWindowProfile() {
-		// TODO Auto-generated method stub
-		return null;
+		return WindowInfo.EDITOR_PROFILE;
 	}
 
 	/**
