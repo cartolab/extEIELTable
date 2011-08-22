@@ -443,12 +443,10 @@ public class TableFrame extends JPanel {
 			this.longValues = longValues;
 		}
 
-		@Override
 		public int getColumnCount() {
 			return fields.size();
 		}
 
-		@Override
 		public int getRowCount() {
 			if (data == null) {
 				return 0;
@@ -468,7 +466,6 @@ public class TableFrame extends JPanel {
 			return data.get(row)[col];
 		}
 
-		@Override
 		public Object getValueAt(int row, int col) {
 			if ((fields.get(col).getDomain().getType().equals("basico")) && (fields.get(col).getDomain().getName().toLowerCase().equals("autonumerico"))) {
 				if ((data.get(row)[col] != null) && (((String)data.get(row)[col]).length() > 0))
