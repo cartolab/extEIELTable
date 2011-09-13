@@ -106,7 +106,7 @@
 				action-command="Núcleos abandonados"
 				position="1403"/>
 			<menu text="EIEL/Tablas/Información urbanística/Núcleo datos generales"
-				action-command="Nucleo encuestado 1"
+				action-command="Nucleo_datos_generales"
 				position="1404"/>
 			<menu text="EIEL/Tablas/Información urbanística/Planeamiento urbanístico"
 				action-command="Plan_Urbanistico_alfanumericos"
